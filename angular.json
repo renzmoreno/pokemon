@@ -2,5 +2,135 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "poke-app": {
+      "root": "projects/poke-app/",
+      "sourceRoot": "projects/poke-app/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/poke-app",
+            "index": "projects/poke-app/src/index.html",
+            "main": "projects/poke-app/src/main.ts",
+            "polyfills": "projects/poke-app/src/polyfills.ts",
+            "tsConfig": "projects/poke-app/tsconfig.app.json",
+            "assets": [
+              "projects/poke-app/src/favicon.ico",
+              "projects/poke-app/src/assets"
+            ],
+            "styles": [
+              "projects/poke-app/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/poke-app/src/environments/environment.ts",
+                  "with": "projects/poke-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "poke-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "poke-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "poke-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/poke-app/src/test.ts",
+            "polyfills": "projects/poke-app/src/polyfills.ts",
+            "tsConfig": "projects/poke-app/tsconfig.spec.json",
+            "karmaConfig": "projects/poke-app/karma.conf.js",
+            "styles": [
+              "projects/poke-app/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/poke-app/src/favicon.ico",
+              "projects/poke-app/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/poke-app/tsconfig.app.json",
+              "projects/poke-app/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "poke-app-e2e": {
+      "root": "projects/poke-app-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/poke-app-e2e/protractor.conf.js",
+            "devServerTarget": "poke-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "poke-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/poke-app-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "poke-app"
 }

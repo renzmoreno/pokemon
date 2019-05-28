@@ -13,13 +13,18 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class PokemonService {
 
-  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=21';
+//  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=21';
+  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-  getpokemons(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.pokemonUrl)
-      .pipe(
-        catchError(this.handleError<Pokemon[]>('getPokemons', []))
-      );
+  getPokemons(): Observable<any> {
+    const url = `${this.pokemonUrl}?offset=0&limit=21`
+    return this.http.get<any>(url);
+  }
+
+  getPokemonDet(name: string): Observable<any>{
+    const url = `${this.pokemonUrl}/${name}`
+    // console.log("url: " + url);
+    return this.http.get<any>(url);
   }
 
 

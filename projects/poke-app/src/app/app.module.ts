@@ -4,13 +4,18 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PokemonComponent } from './pokemon/pokemon.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component'
+
 @NgModule({
   declarations: [
     AppComponent,
-    PokemonComponent
+    PokemonComponent,
+    PokemonDetailComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

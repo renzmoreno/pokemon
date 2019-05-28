@@ -1,7 +1,8 @@
 export class Pokemon {
     // id: number;
-    // name: string;
-    // url: string;
+    name: string;
+    imageUrl: string;
     
-    pokemon: pokemodel1.Result ;
+    
+   
 }

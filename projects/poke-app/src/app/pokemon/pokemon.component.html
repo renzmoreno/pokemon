@@ -1,11 +1,9 @@
 <div>
   <ul >
-    <li *ngFor="let pokemon of listresponse">
+    <li *ngFor="let pokemon of pokemonTag">
       <span >{{pokemon.name}}</span> 
 
-      <app-pokemon-detail [name]=pokemon.name>
-
-      </app-pokemon-detail>
+      <!-- <app-pokemon-detail [name]=pokemon.name></app-pokemon-detail> -->
 
     </li>
   </ul>

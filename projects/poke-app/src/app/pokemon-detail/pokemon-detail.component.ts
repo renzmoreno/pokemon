@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { PokemonService } from '../pokemon.service'
-import { Pokemon } from '../Pokemon';
+import { Pokemon } from '../pokemon';
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -24,12 +24,12 @@ export class PokemonDetailComponent implements OnInit {
     this.pokemonService.getPokemonDet(name).subscribe(response => {
       this.id = response.id;
       this.imgSrc = response.sprites.front_default;
-      console.log(this.imgSrc);
+      // console.log(this.imgSrc);
     });
   }
 
   ngOnInit() {
-    // console.log("renz: " + this.name);
+    console.log("renz: " + this.name);
     this.getPokemonDet(this.name);
   }
 

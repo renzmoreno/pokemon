@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Pokemon } from '../Pokemon';
+import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
+import { PokemonTag } from '../reponse-of-baseURL.model';
+
 
 @Component({
   selector: 'app-pokemon',
@@ -10,14 +12,14 @@ import { PokemonService } from '../pokemon.service';
 })
 export class PokemonComponent implements OnInit {
 
-  listresponse : any;
+  pokemonTag : PokemonTag[];
   
   constructor( private pokemonservice: PokemonService) { }
 
   getPokemons() : void {    
     this.pokemonservice.getPokemons().subscribe(pokemons => {
-      // console.log(pokemons.results);
-      this.listresponse = pokemons.results;
+      console.log(pokemons.results);
+      this.pokemonTag = pokemons.results;
     });
   }
 

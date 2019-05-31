@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { PokemonService } from '../pokemon.service'
 import { Pokemon } from '../pokemon';
+import { PokemonDetails, Types, Type } from '../response-details.model'
 
 @Component({
   selector: 'app-pokemon-detail',
@@ -11,26 +12,40 @@ import { Pokemon } from '../pokemon';
 export class PokemonDetailComponent implements OnInit {
   @Input() name: string;
 
-  listresponse2 : any;
-  id: any;
-  imgSrc: any;
+
+  id: number;
+  imgSrc: string;
+  types: Type[] = new Array();
 
   constructor(
     private pokemonService: PokemonService
   ) { }
 
-  getPokemonDet(name: string): void {
+  getPokemonDetail(name: string): void {
 
-    this.pokemonService.getPokemonDet(name).subscribe(response => {
-      this.id = response.id;
-      this.imgSrc = response.sprites.front_default;
-      // console.log(this.imgSrc);
+    this.pokemonService.getPokemonDetail(name).subscribe((details : PokemonDetails) => {
+      this.id = details.id;
+      this.imgSrc = details.sprites.front_default;
+      console.log(name);
+      details.types.forEach((element: Types) => {
+        console.log(element);
+        this.types.push(element.type);
+      });
     });
   }
 
+  onSelect(name: String): void {
+
+    console.log("this.id: " + this.id);
+    console.log("this.name: " + this.name);
+    console.log("this.imgSrc: " + this.imgSrc);
+    console.log("this.types: " + this.types);
+
+  }
+
   ngOnInit() {
-    console.log("renz: " + this.name);
-    this.getPokemonDet(this.name);
+    // console.log("renz: " + this.name);
+    this.getPokemonDetail(this.name);
   }
 
 }

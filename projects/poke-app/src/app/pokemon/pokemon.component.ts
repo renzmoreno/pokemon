@@ -5,6 +5,7 @@ import { PokemonService } from '../pokemon.service';
 import { PokemonTag } from '../reponse-of-baseURL.model';
 
 
+
 @Component({
   selector: 'app-pokemon',
   templateUrl: './pokemon.component.html',
@@ -12,20 +13,27 @@ import { PokemonTag } from '../reponse-of-baseURL.model';
 })
 export class PokemonComponent implements OnInit {
 
-  pokemonTag : PokemonTag[];
+  pokemonTags : PokemonTag[];
+
   
   constructor( private pokemonservice: PokemonService) { }
 
   getPokemons() : void {    
     this.pokemonservice.getPokemons().subscribe(pokemons => {
-      console.log(pokemons.results);
-      this.pokemonTag = pokemons.results;
+      // console.log(pokemons.results);
+      this.pokemonTags = pokemons.results;
     });
   }
+
+  // onSelect(pokemonTag: PokemonTag) : void {
+  //     console.log(pokemonTag);
+  // }
+
 
 
   ngOnInit() {
     this.getPokemons();
+
   }
 
 }

@@ -1,0 +1,25 @@
+.flex-container {
+    display: flex;
+  }
+
+.borderTest {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.badge-picture {
+    border-style: groove;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: grey;
+}
+
+.badge-details-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.img {
+    height: 100%
+}

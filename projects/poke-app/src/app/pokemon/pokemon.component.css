@@ -1,0 +1,19 @@
+.flex-row-container {
+    /* background: rgb(243, 19, 19); */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    /* justify-content: center; */
+    justify-content: space-around;
+}
+
+.badge {
+    background: rgb(32, 119, 61);
+    width: 30%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+}
+

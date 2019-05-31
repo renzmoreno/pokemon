@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Pokemon } from './pokemon'
 import { Menu } from './reponse-of-baseURL.model'
+import { PokemonDetails } from './response-details.model'
 
 import { Observable, of } from 'rxjs';
 
@@ -18,14 +19,14 @@ export class PokemonService {
   private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
   getPokemons(): Observable<Menu> {
-    const url = `${this.baseUrl}?offset=0&limit=21`
+    const url = `${this.baseUrl}?offset=0&limit=30`
     return this.http.get<Menu>(url);
   }
 
-  getPokemonDet(name: string): Observable<any>{
+  getPokemonDetail(name: string): Observable<PokemonDetails>{
     const url = `${this.baseUrl}/${name}`
-    console.log("url: " + url);
-    return this.http.get<any>(url);
+    // console.log("url: " + url);
+    return this.http.get<PokemonDetails>(url);
   }
 
 

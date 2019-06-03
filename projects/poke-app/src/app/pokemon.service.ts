@@ -23,9 +23,9 @@ export class PokemonService {
     return this.http.get<Menu>(url);
   }
 
-  getPokemonDetail(name: string): Observable<PokemonDetails>{
+  getPokemonDetails(name: string): Observable<PokemonDetails>{
     const url = `${this.baseUrl}/${name}`
-    // console.log("url: " + url);
+    console.log("url: " + url);
     return this.http.get<PokemonDetails>(url);
   }
 

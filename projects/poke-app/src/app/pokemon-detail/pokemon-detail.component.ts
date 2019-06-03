@@ -23,12 +23,12 @@ export class PokemonDetailComponent implements OnInit {
 
   getPokemonDetail(name: string): void {
 
-    this.pokemonService.getPokemonDetail(name).subscribe((details : PokemonDetails) => {
+    this.pokemonService.getPokemonDetails(name).subscribe((details : PokemonDetails) => {
       this.id = details.id;
       this.imgSrc = details.sprites.front_default;
-      console.log(name);
+      // console.log(name);
       details.types.forEach((element: Types) => {
-        console.log(element);
+        // console.log(element);
         this.types.push(element.type);
       });
     });

@@ -1,0 +1,20 @@
+.testborder {
+    border-width: 2px;
+    border: solid;
+}
+
+
+
+span {
+    text-transform: capitalize;
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+.badge {
+    background-color: grey;
+    padding: 5px;
+    margin:  10px;
+}
+

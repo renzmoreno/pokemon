@@ -1,6 +1,17 @@
-<div *ngIf="details"> 
-  <span>{{details.id}}</span>
-  <span>{{name}}</span>
 
+<div *ngIf="details"> 
+  <div class="testborder"> 
+      <span class="badge">{{details.id}}</span> <span class="name">{{name | uppercase}}</span>
+      
+      <div > <img [src]="details.sprites.front_default" > </div>
+
+      <div *ngFor="let stat of details.stats">
+          <span>{{stat.stat.name}}</span> <span>{{stat.base_stat}}</span>
+      </div>
+
+      <div *ngFor="let move of details.moves">
+          <span>{{move.move.name}}</span>
+      </div>
+  </div>    
 
 </div>

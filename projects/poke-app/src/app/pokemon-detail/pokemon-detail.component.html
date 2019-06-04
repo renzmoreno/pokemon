@@ -1,8 +1,8 @@
-<div  class="flex-container" routerLink="/pokemon/{{name}}">
+<div  class="flex-container" routerLink="/pokemon/{{name}}" *ngIf="id">
   <div class="badge-picture"> <img [src]="imgSrc" > </div>
   <div class="badge-details-container">
     <div > 
-      <span > {{id}} </span> <span >{{name | uppercase}} </span>  
+      <span > {{id}} </span> <span class="name">{{name}} </span>  
     </div>
     <div>
       <span *ngFor="let type of types"> {{type.name}} </span>

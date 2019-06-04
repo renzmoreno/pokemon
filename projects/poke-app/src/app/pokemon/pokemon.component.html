@@ -1,8 +1,7 @@
 <div>
   <ul class="flex-row-container">
     <div *ngFor="let pokemon of pokemonTags" class="badge" >
-      <!-- <span >{{pokemon.name}}</span>  -->
- 
+      
       <app-pokemon-detail [name]=pokemon.name > </app-pokemon-detail>
 
     </div>

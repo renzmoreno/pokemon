@@ -15,6 +15,7 @@ export class PokemonProfileComponent implements OnInit {
 
   details : PokemonDetails;
   name: string;
+  // imgSrc: string;
 
 
   constructor(
@@ -22,13 +23,16 @@ export class PokemonProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location
   ) {}
-
+ 
   getPokemonDetails(): void {
     const name  = this.route.snapshot.paramMap.get('name');
-   this.pokemonService.getPokemonDetails(name).subscribe((details: PokemonDetails) => {
-      this.details = details;
-      this.name = name;
-      console.log(details);
+      this.pokemonService.getPokemonDetails(name).subscribe((details: PokemonDetails) => {
+        this.details = details;
+        this.name = name;
+        
+        // this.imgSrc = details.sprites.front_default;
+        
+        console.log(details.moves);
     })
   }
 

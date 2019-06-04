@@ -19,13 +19,13 @@ export class PokemonService {
   private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
   getPokemons(): Observable<Menu> {
-    const url = `${this.baseUrl}?offset=0&limit=30`
+    const url = `${this.baseUrl}?offset=396&limit=32`
     return this.http.get<Menu>(url);
   }
 
   getPokemonDetails(name: string): Observable<PokemonDetails>{
     const url = `${this.baseUrl}/${name}`
-    console.log("url: " + url);
+    // console.log("url: " + url);
     return this.http.get<PokemonDetails>(url);
   }
 

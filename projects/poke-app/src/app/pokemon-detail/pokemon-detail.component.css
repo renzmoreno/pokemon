@@ -1,5 +1,6 @@
 .flex-container {
     display: flex;
+    /* width: 250px; */
   }
 
 .borderTest {
@@ -13,6 +14,8 @@
     margin-left: 10px;
     margin-right: 10px;
     background-color: grey;
+    height: 96px;
+    width: 96px;
 }
 
 .badge-details-container{
@@ -20,6 +23,7 @@
     flex-direction: column;
 }
 
-.img {
-    height: 100%
+.name {
+    text-transform: capitalize;
+    font-family: cursive;
 }

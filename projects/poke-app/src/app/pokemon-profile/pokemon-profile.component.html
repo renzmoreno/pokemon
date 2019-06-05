@@ -1,17 +1,24 @@
 
-<div *ngIf="details"> 
-  <div class="testborder"> 
-      <span class="badge">{{details.id}}</span> <span class="name">{{name | uppercase}}</span>
-      
-      <div > <img [src]="details.sprites.front_default" > </div>
+<div *ngIf="details" > 
+    <div >
+        <div class="header_container">  
+            <span class="badge">{{details.id}}</span> <span >{{name | uppercase}}</span>
+        </div>
+        <div class="horizontal_flex_cont "> 
+            <div class="image_container" > <img [src]="details.sprites.front_default" > </div>
 
-      <div *ngFor="let stat of details.stats">
-          <span>{{stat.stat.name}}</span> <span>{{stat.base_stat}}</span>
-      </div>
-
-      <div *ngFor="let move of details.moves">
-          <span>{{move.move.name}}</span>
-      </div>
-  </div>    
-
+            <div class="vertical_flex_cont testborder">
+                <div *ngFor="let stat of details.stats" >
+                    <span>{{stat.stat.name}}</span> <span>{{stat.base_stat}}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header_container"><span>Moves</span></div>
+       
+        <div *ngFor="let move of details.moves" class="testborder">
+            <span>{{move.move.name}}</span>
+        </div>
+    </div>    
+ 
 </div>

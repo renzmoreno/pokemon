@@ -9,11 +9,11 @@
 }
 
 .badge-picture {
-    border-style: groove;
+    border-style: solid;
     border-radius: 10px;
     margin-left: 10px;
     margin-right: 10px;
-    background-color: grey;
+    background-color: rgb(122, 122, 122);
     height: 96px;
     width: 96px;
 }
@@ -26,4 +26,6 @@
 .name {
     text-transform: capitalize;
     font-family: cursive;
+    font-family: 'Audiowide', cursive;
 }
+

@@ -7,14 +7,16 @@ import { PokemonComponent } from './pokemon/pokemon.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 import { PokemonProfileComponent } from './pokemon-profile/pokemon-profile.component';
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app-routing.module';
+import { PageSelectorComponent } from './page-selector/page-selector.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     PokemonComponent,
     PokemonDetailComponent,
-    PokemonProfileComponent
+    PokemonProfileComponent,
+    PageSelectorComponent
   ],
   imports: [
     BrowserModule,

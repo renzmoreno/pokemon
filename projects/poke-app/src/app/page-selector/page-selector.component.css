@@ -1,0 +1,16 @@
+.horizontal_flex_cont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.page{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.page:hover{
+    cursor: pointer;
+    
+}

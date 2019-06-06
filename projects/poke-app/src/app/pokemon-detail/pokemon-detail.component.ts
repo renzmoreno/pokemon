@@ -34,14 +34,7 @@ export class PokemonDetailComponent implements OnInit {
     });
   }
 
-  onSelect(name: String): void {
-
-    console.log("this.id: " + this.id);
-    console.log("this.name: " + this.name);
-    console.log("this.imgSrc: " + this.imgSrc);
-    console.log("this.types: " + this.types);
-
-  }
+  
 
   ngOnInit() {
     // console.log("renz: " + this.name);

@@ -32,7 +32,7 @@ export class PokemonProfileComponent implements OnInit {
         
         // this.imgSrc = details.sprites.front_default;
         
-        console.log(details.moves);
+
     })
   }
 

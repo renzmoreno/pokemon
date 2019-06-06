@@ -18,9 +18,16 @@ export class PokemonService {
 //  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=21';
   private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-  getPokemons(): Observable<Menu> {
-    const url = `${this.baseUrl}?offset=396&limit=32`
-    return this.http.get<Menu>(url);
+  getPokemons(num?: number): Observable<Menu> {
+    if (num) {
+      let offsetVal = (num-1)*32;
+      const url = `${this.baseUrl}?offset=${offsetVal}&limit=32`;
+      return this.http.get<Menu>(url);
+    }
+    else {
+      const url = `${this.baseUrl}?offset=0&limit=32`;
+      return this.http.get<Menu>(url);
+    }
   }
 
   getPokemonDetails(name: string): Observable<PokemonDetails>{

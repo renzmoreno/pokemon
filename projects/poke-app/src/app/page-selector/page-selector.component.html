@@ -1,7 +1,5 @@
-<div>
-    <ul>
-      <div id="pages" *ngFor="let pages of createPages(totalPageCount)"  >
-        {{pages}}
-      </div>
-    </ul>
+<div class="horizontal_flex_cont">
+  <div *ngFor="let pageNum of pages" class="page" routerLink="/pokemon/page/{{pageNum}}">
+        {{pageNum}}
+  </div>
 </div>

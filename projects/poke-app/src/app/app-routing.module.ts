@@ -6,9 +6,10 @@ import { PokemonProfileComponent } from './pokemon-profile/pokemon-profile.compo
 
 
 const routes: Routes = [
-  { path: 'pokemon', component: PokemonComponent },
-  { path: '', redirectTo: '/pokemon', pathMatch: 'full' },
+  { path: 'pokemon/page/:pageNum', component: PokemonComponent },
+  { path: '', redirectTo: '/pokemon/page/1', pathMatch: 'full' },
   { path: 'pokemon/:name', component: PokemonProfileComponent}
+
 ];
 
 @NgModule({

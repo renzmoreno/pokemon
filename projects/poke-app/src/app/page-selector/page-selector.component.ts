@@ -12,21 +12,21 @@ export class PageSelectorComponent implements OnInit {
   constructor(private pokemonService : PokemonService) { }
 
   totalPageCount : number;
-  pages : string[];
+  // pages: string[] = new Array();
+  pages: number[] =  new Array(); 
 
   buildPages() : void {
     this.pokemonService.getPokemons().subscribe((menu: Menu) => {
         let pokemonCount = menu.count;
         this.totalPageCount = Math.ceil(pokemonCount/32);
-        console.log(this.totalPageCount)
+        for (var i=0; i < this.totalPageCount; i++){
+            this.pages.push(i+1);
+        }
+        console.log(this.pages);
       });
   }
 
-  createPages(i: number) {
-    console.log("createpages" + i);
-    return new Array(i);
-    
-  }
+  
 
   ngOnInit() {
     this.buildPages();

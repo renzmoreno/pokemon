@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { ActivatedRoute } from '@angular/router'
+import { Location } from '@angular/common'
 
 import { Pokemon } from '../pokemon';
 import { PokemonService } from '../pokemon.service';
@@ -14,22 +17,29 @@ import { PokemonTag } from '../reponse-of-baseURL.model';
 export class PokemonComponent implements OnInit {
 
   pokemonTags : PokemonTag[];
-
+  page: number;
   
-  constructor( private pokemonservice: PokemonService) { }
+  constructor( 
+    private pokemonservice: PokemonService,
+    private route: ActivatedRoute,
+    private location: Location
 
-  getPokemons() : void {    
-    this.pokemonservice.getPokemons().subscribe(pokemons => {
+    ) { }
+
+  getPokemons() : void {   
+    const page = parseInt(this.route.snapshot.paramMap.get('pageNum'));
+    
+    console.log("pageNum " + page);
+    this.pokemonservice.getPokemons(page).subscribe(pokemons => {
       // console.log(pokemons.results);
       this.pokemonTags = pokemons.results;
     });
   }
 
-  // onSelect(pokemonTag: PokemonTag) : void {
-  //     console.log(pokemonTag);
-  // }
 
-
+  ngOnDestroy() {
+    console.log("destroyed");
+  }
 
   ngOnInit() {
     this.getPokemons();

@@ -1,5 +1,8 @@
 <div class="horizontal_flex_cont">
-  <div *ngFor="let pageNum of pages" class="page" routerLink="/pokemon/page/{{pageNum}}">
-        {{pageNum}}
+  <div *ngFor="let pageNum of pages"routerLink="/pokemon/page/{{pageNum}}" 
+              (click)="setCurrentPage(pageNum)"
+              [ngClass]="{'page': true,  'current-page' : pageNum === currentPage}"
+            >
+      {{pageNum}}
   </div>
 </div>

@@ -25,7 +25,13 @@
 
 .name {
     text-transform: capitalize;
-    font-family: cursive;
-    font-family: 'Audiowide', cursive;
+    font-family: 'Rancho', cursive;
+     /* font-family: 'Audiowide', cursive; */
+     font-size: 175%;
+}
+
+img {
+    width: 98px;
+    height: 98px;
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service'
 import { Menu } from '../reponse-of-baseURL.model'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-page-selector',
@@ -9,11 +10,15 @@ import { Menu } from '../reponse-of-baseURL.model'
 })
 export class PageSelectorComponent implements OnInit {
 
-  constructor(private pokemonService : PokemonService) { }
+  constructor(
+    private pokemonService : PokemonService,
+    private route: ActivatedRoute
+    ) { }
 
   totalPageCount : number;
   // pages: string[] = new Array();
   pages: number[] =  new Array(); 
+  currentPage : string;
 
   buildPages() : void {
     this.pokemonService.getPokemons().subscribe((menu: Menu) => {
@@ -22,15 +27,22 @@ export class PageSelectorComponent implements OnInit {
         for (var i=0; i < this.totalPageCount; i++){
             this.pages.push(i+1);
         }
-        console.log(this.pages);
+        // console.log(this.pages);
+        this.setCurrentPage ("1");
       });
+  }
+
+  setCurrentPage (pageNum) {
+    this.currentPage = pageNum;
   }
 
   
 
   ngOnInit() {
+    // this.setCurrentPage ("1");
     this.buildPages();
-    
+
+        
   }
 
 }

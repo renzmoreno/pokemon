@@ -27,13 +27,23 @@ export class PokemonComponent implements OnInit {
     ) { }
 
   getPokemons() : void {   
-    const page = parseInt(this.route.snapshot.paramMap.get('pageNum'));
-    
-    console.log("pageNum " + page);
-    this.pokemonservice.getPokemons(page).subscribe(pokemons => {
-      // console.log(pokemons.results);
-      this.pokemonTags = pokemons.results;
+    // const page = parseInt(this.route.snapshot.paramMap.get('pageNum'));
+    this.route.params.subscribe(parameter => {
+      // console.log(parameter.pageNum)
+      
+      this.pokemonservice.getPokemons(parameter.pageNum).subscribe(pokemons => {
+        // console.log(pokemons.results);
+        this.pokemonTags = pokemons.results;
+      });
     });
+    
+    
+    
+    // console.log("pageNum " + page);
+    // this.pokemonservice.getPokemons(page).subscribe(pokemons => {
+    //   // console.log(pokemons.results);
+    //   this.pokemonTags = pokemons.results;
+    // });
   }
 
 

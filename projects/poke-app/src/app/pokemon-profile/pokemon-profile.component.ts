@@ -28,7 +28,7 @@ export class PokemonProfileComponent implements OnInit {
     const name  = this.route.snapshot.paramMap.get('name');
       this.pokemonService.getPokemonDetails(name).subscribe((details: PokemonDetails) => {
         this.details = details;
-        this.name = name;
+        this.name = details.name;
         
         // this.imgSrc = details.sprites.front_default;
         

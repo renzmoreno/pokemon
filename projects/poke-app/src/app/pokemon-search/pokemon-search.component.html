@@ -1,0 +1,8 @@
+<div id="search-component">
+  <label for="search-box">Search by Name: </label>
+ 
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+  <!-- <input #searchBox id="search-box"  /> -->
+  <button routerLink="/pokemon/{{pokemonName}}"> Search </button>
+ 
+</div>

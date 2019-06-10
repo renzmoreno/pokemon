@@ -22,18 +22,23 @@ export class PageSelectorComponent implements OnInit {
 
   buildPages() : void {
     this.pokemonService.getPokemons().subscribe((menu: Menu) => {
+      
         let pokemonCount = menu.count;
         this.totalPageCount = Math.ceil(pokemonCount/32);
         for (var i=0; i < this.totalPageCount; i++){
             this.pages.push(i+1);
         }
         // console.log(this.pages);
-        this.setCurrentPage ("1");
+        // this.setCurrentPage ("1");
       });
   }
 
-  setCurrentPage (pageNum) {
-    this.currentPage = pageNum;
+  setCurrentPage (pageNum ) {
+    // this.route.params.subscribe(respo => {
+    //   // this.currentPage = pageNum; 
+    //   console.log(respo.pageNum);
+    // });
+    this.currentPage = pageNum; 
   }
 
   
@@ -41,7 +46,7 @@ export class PageSelectorComponent implements OnInit {
   ngOnInit() {
     // this.setCurrentPage ("1");
     this.buildPages();
-
+    
         
   }
 

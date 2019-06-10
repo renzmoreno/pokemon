@@ -8,7 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PokemonDetailComponent } from './pokemon-detail/pokemon-detail.component';
 import { PokemonProfileComponent } from './pokemon-profile/pokemon-profile.component';
 import { AppRoutingModule } from './app-routing.module';
-import { PageSelectorComponent } from './page-selector/page-selector.component'
+import { PageSelectorComponent } from './page-selector/page-selector.component';
+import { PokemonSearchComponent } from './pokemon-search/pokemon-search.component'
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { PageSelectorComponent } from './page-selector/page-selector.component'
     PokemonComponent,
     PokemonDetailComponent,
     PokemonProfileComponent,
-    PageSelectorComponent
+    PageSelectorComponent,
+    PokemonSearchComponent
   ],
   imports: [
     BrowserModule,

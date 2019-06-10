@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { Pokemon } from './pokemon'
-import { Menu } from './reponse-of-baseURL.model'
+import { Pokemon  } from './pokemon'
+import { Menu, PokemonTag } from './reponse-of-baseURL.model'
 import { PokemonDetails } from './response-details.model'
+
 
 import { Observable, of } from 'rxjs';
 
@@ -35,6 +36,26 @@ export class PokemonService {
     // console.log("url: " + url);
     return this.http.get<PokemonDetails>(url);
   }
+
+  searchPokemonsByType(term: String) : Observable<Menu> {
+    const url = `${this.baseUrl}/${term}`
+    
+    return  this.http.get<Menu>(url);
+     
+  }
+
+  // searchPokemons(term: string): Observable<PokemonDetails> {
+  //   if (!term.trim()) {
+  //     // if not search term, return empty hero array.
+  //     return of();
+  //   }
+  //   return this.http.get<PokemonDetails>(`${this.baseUrl}/${term}`).pipe(
+  //     tap(_ => console.log(`${this.baseUrl}/${term}`)),
+  //     catchError(this.handleError<PokemonDetails>('searchPokemon', ))
+  //   );
+  // }
+
+
 
 
   constructor(

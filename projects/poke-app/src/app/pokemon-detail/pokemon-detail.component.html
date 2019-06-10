@@ -1,11 +1,26 @@
 <div  class="flex-container" routerLink="/pokemon/{{name}}" *ngIf="id">
-  <div class="badge-picture"> <img [src]="imgSrc" > </div>
+  
+  <div class="badge-picture" *ngIf="imgSrc; else nullImage"> <img [src]="imgSrc" > </div>
+  <ng-template #nullImage class="badge-picture" > 
+      <img src="assets/pokeball.png"> 
+  </ng-template>
+  
   <div class="badge-details-container">
     <div >  
-      <span > {{id}} </span> <span class="name">{{name}} </span>  
+      <!-- <span > {{id}} </span>  -->
+      <span class="name">{{name}} </span>  
     </div>
     <div>
-      <span *ngFor="let type of types"> {{type.name}} </span>
+      <span *ngFor="let type of types" 
+            [ngClass]="{'typeBase': true,  
+                        'water' : type.name === 'water',
+                        'grass' : type.name === 'grass',
+                        'grass' : type.name === 'bug',
+                        'fire'   : type.name === 'fire',  
+                        'electric'   : type.name === 'electric', 
+                        'poison' : type.name === 'poison' }">
+         {{type.name}} 
+      </span>
     </div>
   </div>
   

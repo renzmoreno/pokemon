@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service'
-import { PokemonDetails } from '../response-details.model'
+import { PokemonDetails,Types } from '../response-details.model'
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
@@ -15,7 +15,8 @@ export class PokemonProfileComponent implements OnInit {
 
   details : PokemonDetails;
   name: string;
-  // imgSrc: string;
+  imgSrc: string;
+  types: Types[];
 
 
   constructor(
@@ -29,8 +30,11 @@ export class PokemonProfileComponent implements OnInit {
       this.pokemonService.getPokemonDetails(name).subscribe((details: PokemonDetails) => {
         this.details = details;
         this.name = details.name;
+        this.types =  details.types;
+        console.log(this.types);
+
         
-        // this.imgSrc = details.sprites.front_default;
+        this.imgSrc = details.sprites.front_default;
         
 
     })

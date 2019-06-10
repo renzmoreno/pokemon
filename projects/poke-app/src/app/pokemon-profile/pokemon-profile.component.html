@@ -1,18 +1,48 @@
-
-<div *ngIf="details" > 
+ 
+<div *ngIf="details" class="whole_container"> 
+<div class="width_limiter"> 
     <div >
         <div class="header_container">  
-            <span class="badge">{{details.id}}</span> <span >{{name | uppercase}}</span>
+            <span class="badge">{{details.id}}</span> <span>{{name | uppercase}}</span>
         </div>
-        <div class="horizontal_flex_cont "> 
-            <div class="image_container" > <img [src]="details.sprites.front_default" > </div>
 
-            <div class="vertical_flex_cont testborder">
-                <div *ngFor="let stat of details.stats" >
-                    <span>{{stat.stat.name}}</span> <span>{{stat.base_stat}}</span>
-                </div>
+        <div class="horizontal_flex_cont " > 
+            <div *ngIf="imgSrc; else nullImage" class="image_container" > 
+                <img [src]="imgSrc" > 
             </div>
+            <ng-template #nullImage class="image_container" > 
+                <img src="assets/pokeball.png"> 
+            </ng-template>
+
+            <div class="vertical_flex_cont ">
+
+                    <div class="groupMargin">
+                            <span *ngFor="let type of types" 
+                                  [ngClass]="{'typeBase': true,  
+                                              'water' : type.type.name === 'water',
+                                              'grass' : type.type.namee === 'grass',
+                                              'grass' : type.type.name === 'bug',
+                                              'fire'   : type.type.name === 'fire', 
+                                              'electric'   : type.type.name === 'electric', 
+                                              'poison' : type.type.name === 'poison' }">
+                               {{type.type.name}} 
+                            </span>
+                    </div>
+
+                <div *ngFor="let stat of details.stats" >
+                    <div class="statName">{{stat.stat.name}}</div> 
+                    <div class="statName">{{stat.base_stat}}</div >
+                </div>
+
+                
+                
+            </div>
+            
+            
+
         </div>
+
+
         
         <div class="header_container"><span>Moves</span></div>
        
@@ -20,5 +50,5 @@
             <span>{{move.move.name}}</span>
         </div>
     </div>    
- 
+</div>
 </div>

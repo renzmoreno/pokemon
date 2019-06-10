@@ -35,3 +35,41 @@ img {
     height: 98px;
 }
 
+.typeBase {
+    background-color: #EBBB78;
+    margin-left: 3px;
+    margin-right: 3px;
+    /* padding-left: 3px;
+    padding-right: 3px; */
+    padding: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    /* font-family: 'Rancho', cursive;
+    font-size: 18px; */
+}
+
+.grass {
+    background-color: green;
+}
+
+.water {
+    background-color:#616EFF;
+}
+
+.fire {
+    background-color: red;
+}
+
+.poison {
+    background-color: violet;
+}
+
+.electric {
+    background-color: yellow;
+}
+
+
+
+

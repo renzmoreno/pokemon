@@ -46,8 +46,8 @@ img {
     border-width: 1px;
     border-radius: 5px;
     text-transform: capitalize;
-    /* font-family: 'Rancho', cursive;
-    font-size: 18px; */
+    font-family: 'Rancho', cursive;
+    font-size: 18px;
 }
 
 .grass {
@@ -70,6 +70,27 @@ img {
     background-color: yellow;
 }
 
+.dark {
+    background-color: #5A5979;
+    /* color: white; */
+    /* background-color: black; */
+}
+
+.flying {
+    background-color: #93B2C7;
+}
+
+.ice {
+    background-color: #D9EFF8;
+}
+
+.fairy{
+    background-color: #EA1369;
+}
+
+.ghost {
+    background-color: #906790;
+}
 
 
 

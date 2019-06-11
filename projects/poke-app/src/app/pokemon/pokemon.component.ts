@@ -28,7 +28,7 @@ export class PokemonComponent implements OnInit {
 
   getPokemons() : void {   
     this.route.params.subscribe(parameter => {
-      console.log(parameter.pageNum)
+      // console.log(parameter.pageNum)
       
       this.pokemonservice.getPokemons(parameter.pageNum).subscribe(pokemons => {
         // console.log(pokemons.results);
@@ -46,9 +46,9 @@ export class PokemonComponent implements OnInit {
   }
 
 
-  ngOnDestroy() {
-    console.log("destroyed");
-  }
+  // ngOnDestroy() {
+  //   console.log("destroyed");
+  // }
 
   ngOnInit() {
     this.getPokemons();

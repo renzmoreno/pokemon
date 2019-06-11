@@ -18,36 +18,49 @@
 
                     <div class="groupMargin">
                             <span *ngFor="let type of types" 
-                                  [ngClass]="{'typeBase': true,  
-                                              'water' : type.type.name === 'water',
-                                              'grass' : type.type.namee === 'grass',
-                                              'grass' : type.type.name === 'bug',
-                                              'fire'   : type.type.name === 'fire', 
-                                              'electric'   : type.type.name === 'electric', 
-                                              'poison' : type.type.name === 'poison' }">
-                               {{type.type.name}} 
+                                    class="typeBase {{type.type.name}}">
+                               {{type.type.name}}
                             </span>
                     </div>
 
                 <div *ngFor="let stat of details.stats" >
                     <div class="statName">{{stat.stat.name}}</div> 
-                    <div class="statName">{{stat.base_stat}}</div >
+                    <div class="statValue">{{stat.base_stat}}</div >
                 </div>
-
-                
-                
             </div>
-            
-            
-
         </div>
 
+        <div class="header_container"><span>Profile</span></div>
+        <div class="vertical_flex_cont blockMargin ">
+                <div >
+                    <p>{{description}}</p>
+                </div>     
+                <div class="horizontal_flex_cont "> 
+                        <div>
+                                <div class="statName">Height</div> 
+                                <div class="statValue">{{details.height}}cm</div >
+                        </div>
+                        <div>
+                                <div class="statName">Weight</div> 
+                                <div class="statValue">{{details.weight}}g</div >
+                        </div>
+                </div>
+        </div>
 
+        <div class="header_container"><span>Evolution</span></div>
+        <app-pokemon-evo-display [inputEvolvesFrom]=pokemonEvolvesFrom [inputEvolvesTo]=pokemonsEvolvesTo *ngIf="pokemonEvolvesFrom && pokemonsEvolvesTo"></app-pokemon-evo-display>
+        <!-- <div class="moves">
+                <span>{{pokemonEvolvesFrom}}</span>
+        </div>
+        <div *ngFor="let evolvesTo of pokemonsEvolvesTo" class="moves">
+                <span>{{evolvesTo}}</span>
+        </div> -->
         
         <div class="header_container"><span>Moves</span></div>
-       
-        <div *ngFor="let move of details.moves" class="testborder">
-            <span>{{move.move.name}}</span>
+        <div class="vertical_flex_cont ">
+            <div *ngFor="let move of details.moves" class="moves">
+                <span>{{move.move.name}}</span>
+            </div>
         </div>
     </div>    
 </div>

@@ -1,0 +1,9 @@
+<p *ngIf="evolvesFromName && evolvesToNames">
+  {{evolvesFromName}} {{evolvesFromURL}}
+  
+</p>
+<div *ngIf="evolvesToNames">
+  <div *ngFor="let evolvesTo of evolvesToNames" >
+      <span>{{evolvesTo}}</span>
+  </div>
+</div>

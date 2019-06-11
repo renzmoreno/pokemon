@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Pokemon  } from './pokemon'
 import { Menu, PokemonTag } from './reponse-of-baseURL.model'
 import { PokemonDetails } from './response-details.model'
+import { PokemonSpecies } from './response-species.model'
+import { Evolution } from './response-evolution.model'
 
 
 import { Observable, of } from 'rxjs';
@@ -18,6 +20,7 @@ export class PokemonService {
 
 //  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=21';
   private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private baseURLSpecies = 'https://pokeapi.co/api/v2/pokemon-species';
 
   getPokemons(num?: number): Observable<Menu> {
     if (num) {
@@ -40,8 +43,16 @@ export class PokemonService {
   searchPokemonsByType(term: String) : Observable<Menu> {
     const url = `${this.baseUrl}/${term}`
     
-    return  this.http.get<Menu>(url);
-     
+    return  this.http.get<Menu>(url); 
+  }
+
+  getPokemonSpecies(name: String): Observable<PokemonSpecies> {
+    const url = `${this.baseURLSpecies}/${name}`
+    return this.http.get<PokemonSpecies>(url);
+  }
+
+  getPokemonEvolution(url: string): Observable<Evolution> {
+    return this.http.get<Evolution>(url);
   }
 
   // searchPokemons(term: string): Observable<PokemonDetails> {

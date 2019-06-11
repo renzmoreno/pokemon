@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { PokemonService } from '../pokemon.service'
-import { Pokemon } from '../pokemon';
 import { PokemonDetails, Types, Type } from '../response-details.model'
 
 @Component({

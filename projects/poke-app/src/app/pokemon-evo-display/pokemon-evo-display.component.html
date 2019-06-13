@@ -1,9 +1,32 @@
-<p *ngIf="evolvesFromName && evolvesToNames">
-  {{evolvesFromName}} {{evolvesFromURL}}
+<div *ngIf="pokemonBase">
+
+  {{pokemonBase.name}}
+  {{pokemonBase.level}}
+  {{pokemonBase.img}}
+  {{pokemonBase.minLevel}}
+  {{pokemonBase.item}}
+  {{pokemonBase.trigger}}
   
-</p>
-<div *ngIf="evolvesToNames">
-  <div *ngFor="let evolvesTo of evolvesToNames" >
-      <span>{{evolvesTo}}</span>
+
+</div> 
+<!-- <div *ngIf="pokemonlevel1">
+  <div *ngFor="let poke of pokemonlevel1" >
+    {{poke.name}}
+    {{poke.level}}
+    {{poke.img}}
+    {{poke.minLevel}}
+    {{poke.item}}
+    {{poke.trigger}}
   </div>
 </div>
+
+<div *ngIf="pokemonlevel2">
+  <div *ngFor="let poke2 of pokemonlevel2" >
+    {{poke2.name}}
+    {{poke2.level}}
+    {{poke2.img}}
+    {{poke2.minLevel}}
+    {{poke2.item}}
+    {{poke2.trigger}}
+  </div>
+</div> -->

@@ -48,7 +48,18 @@
         </div>
 
         <div class="header_container"><span>Evolution</span></div>
-        <app-pokemon-evo-display [inputEvolvesFrom]=pokemonEvolvesFrom [inputEvolvesTo]=pokemonsEvolvesTo *ngIf="pokemonEvolvesFrom && pokemonsEvolvesTo"></app-pokemon-evo-display>
+        <!-- <div *ngIf="pokemonEvolutionDetailList">
+            <div *ngFor="let pokemon of pokemonEvolutionDetailList" >
+                <span>{{pokemon.name}}</span> 
+                <span> {{pokemon.level}}</span>
+                <span> {{pokemon.minLevel}}</span>
+                <span> {{pokemon.trigger}}</span>
+                <span> {{pokemon.item}}</span>
+            </div>
+        </div> -->
+        
+        <!-- <app-pokemon-evo-display [inputEvolvesFrom]=pokemonEvolvesFrom [inputEvolvesTo]=pokemonsEvolvesTo *ngIf="pokemonEvolvesFrom && pokemonsEvolvesTo"></app-pokemon-evo-display> -->
+        <app-pokemon-evo-display [inputEvolveDetList]=pokemonEvolutionDetailList *ngIf="pokemonEvolutionDetailList"></app-pokemon-evo-display>
         <!-- <div class="moves">
                 <span>{{pokemonEvolvesFrom}}</span>
         </div>

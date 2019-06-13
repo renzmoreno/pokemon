@@ -3,10 +3,12 @@ import { PokemonService } from '../pokemon.service'
 import { PokemonDetails,Types } from '../response-details.model'
 import { PokemonSpecies, FlavorTextEntry } from '../response-species.model'
 import { Evolution, EvolvesTo } from '../response-evolution.model'
+// import { PokemonEvolutionDetail } from '../pokemon'
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ConstantPool } from '@angular/compiler';
+import { PokemonEvolutionDetail } from '../pokemon';
 
 @Component({
   selector: 'app-pokemon-profile',
@@ -21,7 +23,9 @@ export class PokemonProfileComponent implements OnInit {
   types: Types[];
   description: String;
   pokemonEvolvesFrom : string;
-  pokemonsEvolvesTo: String[] = new Array();
+  // pokemonsEvolvesTo: String[] = new Array();
+  pokemonEvolutionDetailList: PokemonEvolutionDetail[] = new Array();
+  lvl: number; 
 
 
   constructor(
@@ -57,19 +61,80 @@ export class PokemonProfileComponent implements OnInit {
         this.pokemonService.getPokemonEvolution(species.evolution_chain.url)
             .subscribe((evolution: Evolution) => {
               this.pokemonEvolvesFrom =  evolution.chain.species.name;
-              let evolves = evolution.chain.evolves_to 
+              this.lvl = 0;
+              var evoPokemonbase = new PokemonEvolutionDetail();
+              evoPokemonbase.level = this.lvl;
+              evoPokemonbase.name = evolution.chain.species.name;
+              this.pokemonEvolutionDetailList.push(evoPokemonbase);
+              // console.log('base');
+              // console.log(this.pokemonEvolutionDetailList);
               // this.pokemonsEvolvesTo.push(evolves[0].species.name);
-              do {
-                this.pokemonsEvolvesTo.push(evolves[0].species.name);
-                // console.log(evolves);
-                evolves = evolves[0].evolves_to;
+
+              evolution.chain.evolves_to.forEach(evolvesTo => {
+                let evolves = evolvesTo; 
                 
-              } while (!evolves) 
-              // console.log(this.pokemonEvolvesFrom);
-              // console.log(evolution.chain.evolves_to[0].species.name);
-              // console.log(evolution.chain.evolves_to[0].evolves_to[0].species.name);
+                do {
+                  // console.log(evolves);
+                  var evoPokemon = new PokemonEvolutionDetail();
+                  
+                  // console.log(evoPokemon);
+                  evoPokemon.level = this.lvl + 1;
+                  evoPokemon.name = evolves.species.name;
+                  if (evolves.evolution_details[0].min_level){
+                    evoPokemon.minLevel = evolves.evolution_details[0].min_level;
+                  }
+                  if(evolves.evolution_details[0].item){
+                    console.log(evolves.evolution_details[0].item);
+                    evoPokemon.item = evolves.evolution_details[0].item.name;
+                  }
+                  if(evolves.evolution_details[0].trigger){
+                    evoPokemon.trigger = evolves.evolution_details[0].trigger.name;
+                  }
+                  
+                  
+                  
+                  // console.log(evoPokemon.name);
+                  // console.log(evoPokemon.level);
+                  this.pokemonEvolutionDetailList.push(evoPokemon);
+                  // console.log(this.pokemonEvolveLevelToList);
+                  
+                  
+                  
+                } while (!evolves) 
+
+                // console.log('out of loop')
+                // console.log(this.pokemonEvolvesFrom);
+                // console.log(evolution.chain.evolves_to[0].species.name);
+                // console.log(evolution.chain.evolves_to[0].evolves_to[0].species.name);
               
-              this.pokemonsEvolvesTo.push(evolution.chain.evolves_to[0].evolves_to[0].species.name);
+                
+                // console.log(evolution.chain.evolves_to[0].evolves_to[0].species.name);
+                if (evolvesTo.evolves_to[0]){
+                  var evoPokemon = new PokemonEvolutionDetail();
+                  evoPokemon.level = this.pokemonEvolutionDetailList[this.pokemonEvolutionDetailList.length-1].level + 1;
+                  evoPokemon.name = evolvesTo.evolves_to[0].species.name;
+
+                  if (evolvesTo.evolves_to[0].evolution_details[0].min_level){
+                    evoPokemon.minLevel = evolvesTo.evolves_to[0].evolution_details[0].min_level;
+                  }
+                  if(evolvesTo.evolves_to[0].evolution_details[0].item){
+                    // console.log(evolvesTo.evolves_to[0].evolution_details[0].item);
+                    evoPokemon.item = evolvesTo.evolves_to[0].evolution_details[0].item.name;
+                  }
+                  if(evolvesTo.evolves_to[0].evolution_details[0].trigger){
+                    evoPokemon.trigger = evolvesTo.evolves_to[0].evolution_details[0].trigger.name;
+                  }
+
+                  // console.log(evolvesTo.evolves_to[0]);
+                  
+                  this.pokemonEvolutionDetailList.push(evoPokemon);
+
+
+                }
+                });
+
+              
+              
         }); 
         
     });

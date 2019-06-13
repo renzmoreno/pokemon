@@ -1,6 +1,6 @@
 <div  class="flex-container" routerLink="/pokemon/{{name}}" *ngIf="id">
   
-  <div class="badge-picture" *ngIf="imgSrc; else nullImage"> <img [src]="imgSrc" > </div>
+  <div class="badge-picture" *ngIf="imgSrc; else nullImage" > <img [src]="imgSrc" > </div>
   <ng-template #nullImage class="badge-picture" > 
       <img src="assets/pokeball.png"> 
   </ng-template>

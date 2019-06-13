@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
 
-import { Pokemon } from '../pokemon';
+
 import { PokemonService } from '../pokemon.service';
 import { PokemonTag } from '../reponse-of-baseURL.model';
 

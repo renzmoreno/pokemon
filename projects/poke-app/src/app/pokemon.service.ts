@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Pokemon  } from './pokemon'
+
 import { Menu, PokemonTag } from './reponse-of-baseURL.model'
 import { PokemonDetails } from './response-details.model'
 import { PokemonSpecies } from './response-species.model'

@@ -3,10 +3,15 @@ export interface Trigger {
     url: string;
 }
 
+export interface itemForEvo {
+    name: string;
+    url: string;
+}
+
 export interface EvolutionDetail {
     gender?: any;
     held_item?: any;
-    item?: any;
+    item?: itemForEvo;
     known_move?: any;
     known_move_type?: any;
     location?: any;

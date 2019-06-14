@@ -1,32 +1,69 @@
-<div *ngIf="pokemonBase">
+<div *ngIf="isEvolving === true; else noEvolution">
+  <div *ngFor="let poke1 of pokemonlevel1" class="flex-col-container ">
+    <div class="flex-row-container "> 
+      <div routerLink="/pokemon/{{pokemonBase.name}}" class="pokemonCont">
+          <img src={{pokemonBase.img}} >
+          <div class="Name">
+              {{pokemonBase.name}}
+          </div>
+      </div>
+      <div class="midBox">
+        <span class="arrow">→</span>
+          <!-- <div class="triangle-right "></div> -->
+        <div *ngIf="poke1.minLevel">
+            
+            Minimum Level {{poke1.minLevel}} is required.
+        </div>
+        <div *ngIf="poke1.trigger === 'use-item'">
+          Use {{poke1.item}} to evolve.
+        </div>  
+        <div *ngIf="poke1.trigger === 'level-up'">
+            Level up!!!!
+        </div>  
+      </div>
+      <div routerLink="/pokemon/{{poke1.name}}" class="pokemonCont">
+          <img src={{poke1.img}}>
+          <div class="Name">
+              {{poke1.name}}
+          </div>
+      </div>
+    </div>
 
-  {{pokemonBase.name}}
-  {{pokemonBase.level}}
-  {{pokemonBase.img}}
-  {{pokemonBase.minLevel}}
-  {{pokemonBase.item}}
-  {{pokemonBase.trigger}}
-  
-
-</div> 
-<!-- <div *ngIf="pokemonlevel1">
-  <div *ngFor="let poke of pokemonlevel1" >
-    {{poke.name}}
-    {{poke.level}}
-    {{poke.img}}
-    {{poke.minLevel}}
-    {{poke.item}}
-    {{poke.trigger}}
+    <div *ngIf="pokemonlevel2">
+        <div *ngFor="let poke2 of pokemonlevel2" class="flex-row-container">
+          <div routerLink="/pokemon/{{poke1.name}}" class="pokemonCont">
+              <img src={{poke1.img}}>
+              <div class="Name">
+                  {{poke1.name}}
+              </div>
+          </div>
+          <div class="midBox">
+              <span class="arrow">→</span>
+                <div *ngIf="poke2.minLevel">
+                  Minimum Level {{poke2.minLevel}} is required.
+                </div>
+                <div *ngIf="poke2.trigger === 'use-item'">
+                  Use {{poke2.item}} to evolve.
+                </div>  
+                <div *ngIf="poke2.trigger === 'level-up'">
+                    Level up!!!!
+                </div> 
+          </div>
+          <div routerLink="/pokemon/{{poke2.name}}" class="pokemonCont">
+              <img src={{poke2.img}}>
+              <div class="Name">
+                  {{poke2.name}}
+              </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
-
-<div *ngIf="pokemonlevel2">
-  <div *ngFor="let poke2 of pokemonlevel2" >
-    {{poke2.name}}
-    {{poke2.level}}
-    {{poke2.img}}
-    {{poke2.minLevel}}
-    {{poke2.item}}
-    {{poke2.trigger}}
+<ng-template #noEvolution class="testborder"> 
+    <div class="pokemonCont">
+      <div class="Name">
+          No Evolution Data!!!.
+      </div>
   </div>
-</div> -->
+</ng-template>
+

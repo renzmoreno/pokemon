@@ -9,6 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ConstantPool } from '@angular/compiler';
 import { PokemonEvolutionDetail } from '../pokemon';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
+// import { Rx } from 'rxjs'
 
 @Component({
   selector: 'app-pokemon-profile',
@@ -35,114 +38,105 @@ export class PokemonProfileComponent implements OnInit {
   ) {}
  
   getPokemonDetails(): void {
-    const name  = this.route.snapshot.paramMap.get('name');
-      this.pokemonService.getPokemonDetails(name).subscribe((details: PokemonDetails) => {
+    // const name  = this.route.snapshot.paramMap.get('name');
+    const name = this.route.params.subscribe(parameter => {
+      this.pokemonService.getPokemonDetails(parameter.name).subscribe((details: PokemonDetails) => {
         this.details = details;
         this.name = details.name;
         this.types =  details.types;
         // console.log(this.types);
         this.imgSrc = details.sprites.front_default;
     })
+    });
+    //   this.pokemonService.getPokemonDetails(name).subscribe((details: PokemonDetails) => {
+    //     this.details = details;
+    //     this.name = details.name;
+    //     this.types =  details.types;
+    //     // console.log(this.types);
+    //     this.imgSrc = details.sprites.front_default;
+    // })
   }
 
-  getPokemonSpeciesDetais(): void {
-    const name  = this.route.snapshot.paramMap.get('name');
-    this.pokemonService.getPokemonSpecies(name).subscribe((species: PokemonSpecies) => {
-      let isEn: string = 'false'
-      let i: number = 0;
-        while ( isEn === 'false'){
-          if(species.flavor_text_entries[i].language.name === "en"){
-            this.description = species.flavor_text_entries[i].flavor_text;
-            isEn = 'true'
+  getPokemonSpeciesDetails(): void {
+    // const name  = this.route.snapshot.paramMap.get('name');
+    const name = this.route.params.subscribe(parameter =>{
+      this.pokemonService.getPokemonSpecies(parameter.name).subscribe((species: PokemonSpecies) => {
+        let isEn: string = 'false'
+        let i: number = 0;
+          while ( isEn === 'false'){
+            if(species.flavor_text_entries[i].language.name === "en"){
+              this.description = species.flavor_text_entries[i].flavor_text;
+              isEn = 'true'
+            }
+            i++
           }
-          i++
-        }
-
-        this.pokemonService.getPokemonEvolution(species.evolution_chain.url)
-            .subscribe((evolution: Evolution) => {
-              this.pokemonEvolvesFrom =  evolution.chain.species.name;
-              this.lvl = 0;
-              var evoPokemonbase = new PokemonEvolutionDetail();
-              evoPokemonbase.level = this.lvl;
-              evoPokemonbase.name = evolution.chain.species.name;
-              this.pokemonEvolutionDetailList.push(evoPokemonbase);
-              // console.log('base');
-              // console.log(this.pokemonEvolutionDetailList);
-              // this.pokemonsEvolvesTo.push(evolves[0].species.name);
-
-              evolution.chain.evolves_to.forEach(evolvesTo => {
-                let evolves = evolvesTo; 
-                
-                do {
-                  // console.log(evolves);
-                  var evoPokemon = new PokemonEvolutionDetail();
+  
+          this.pokemonService.getPokemonEvolution(species.evolution_chain.url)
+              .subscribe((evolution: Evolution) => {
+  
+                this.pokemonEvolvesFrom =  evolution.chain.species.name;
+                this.lvl = 0;
+                var evoPokemonbase = new PokemonEvolutionDetail();
+                evoPokemonbase.level = this.lvl;
+                evoPokemonbase.name = evolution.chain.species.name;
+                this.pokemonEvolutionDetailList.push(evoPokemonbase);
+  
+                evolution.chain.evolves_to.forEach(evolvesTo => {
+                  let evolves = evolvesTo; 
                   
-                  // console.log(evoPokemon);
-                  evoPokemon.level = this.lvl + 1;
-                  evoPokemon.name = evolves.species.name;
-                  if (evolves.evolution_details[0].min_level){
-                    evoPokemon.minLevel = evolves.evolution_details[0].min_level;
+                  do {
+                    // console.log(evolves);
+                    var evoPokemon = new PokemonEvolutionDetail();
+                    evoPokemon.level = this.lvl + 1;
+                    evoPokemon.name = evolves.species.name;
+                    if (evolves.evolution_details[0].min_level){
+                      evoPokemon.minLevel = evolves.evolution_details[0].min_level;
+                    }
+                    if(evolves.evolution_details[0].item){
+                      // console.log(evolves.evolution_details[0].item);
+                      evoPokemon.item = evolves.evolution_details[0].item.name;
+                    }
+                    if(evolves.evolution_details[0].trigger){
+                      evoPokemon.trigger = evolves.evolution_details[0].trigger.name;
+                    }
+                    
+                    this.pokemonEvolutionDetailList.push(evoPokemon);
+  
+                  } while (!evolves) 
+  
+                  if (evolvesTo.evolves_to[0]){
+                    var evoPokemon = new PokemonEvolutionDetail();
+                    evoPokemon.level = this.pokemonEvolutionDetailList[this.pokemonEvolutionDetailList.length-1].level + 1;
+                    evoPokemon.name = evolvesTo.evolves_to[0].species.name;
+  
+                    if (evolvesTo.evolves_to[0].evolution_details[0].min_level){
+                      evoPokemon.minLevel = evolvesTo.evolves_to[0].evolution_details[0].min_level;
+                    }
+                    if(evolvesTo.evolves_to[0].evolution_details[0].item){
+                      // console.log(evolvesTo.evolves_to[0].evolution_details[0].item);
+                      evoPokemon.item = evolvesTo.evolves_to[0].evolution_details[0].item.name;
+                    }
+                    if(evolvesTo.evolves_to[0].evolution_details[0].trigger){
+                      evoPokemon.trigger = evolvesTo.evolves_to[0].evolution_details[0].trigger.name;
+                    }
+  
+                    // console.log(evolvesTo.evolves_to[0]);
+                    
+                    this.pokemonEvolutionDetailList.push(evoPokemon);
+  
                   }
-                  if(evolves.evolution_details[0].item){
-                    console.log(evolves.evolution_details[0].item);
-                    evoPokemon.item = evolves.evolution_details[0].item.name;
-                  }
-                  if(evolves.evolution_details[0].trigger){
-                    evoPokemon.trigger = evolves.evolution_details[0].trigger.name;
-                  }
-                  
-                  
-                  
-                  // console.log(evoPokemon.name);
-                  // console.log(evoPokemon.level);
-                  this.pokemonEvolutionDetailList.push(evoPokemon);
-                  // console.log(this.pokemonEvolveLevelToList);
-                  
-                  
-                  
-                } while (!evolves) 
-
-                // console.log('out of loop')
-                // console.log(this.pokemonEvolvesFrom);
-                // console.log(evolution.chain.evolves_to[0].species.name);
-                // console.log(evolution.chain.evolves_to[0].evolves_to[0].species.name);
-              
-                
-                // console.log(evolution.chain.evolves_to[0].evolves_to[0].species.name);
-                if (evolvesTo.evolves_to[0]){
-                  var evoPokemon = new PokemonEvolutionDetail();
-                  evoPokemon.level = this.pokemonEvolutionDetailList[this.pokemonEvolutionDetailList.length-1].level + 1;
-                  evoPokemon.name = evolvesTo.evolves_to[0].species.name;
-
-                  if (evolvesTo.evolves_to[0].evolution_details[0].min_level){
-                    evoPokemon.minLevel = evolvesTo.evolves_to[0].evolution_details[0].min_level;
-                  }
-                  if(evolvesTo.evolves_to[0].evolution_details[0].item){
-                    // console.log(evolvesTo.evolves_to[0].evolution_details[0].item);
-                    evoPokemon.item = evolvesTo.evolves_to[0].evolution_details[0].item.name;
-                  }
-                  if(evolvesTo.evolves_to[0].evolution_details[0].trigger){
-                    evoPokemon.trigger = evolvesTo.evolves_to[0].evolution_details[0].trigger.name;
-                  }
-
-                  // console.log(evolvesTo.evolves_to[0]);
-                  
-                  this.pokemonEvolutionDetailList.push(evoPokemon);
-
-
-                }
-                });
-
-              
-              
-        }); 
-        
+                  });
+          }); 
+          
+      });
     });
+    
   }
 
   ngOnInit() {
+    
     this.getPokemonDetails();
-    this.getPokemonSpeciesDetais()
+    this.getPokemonSpeciesDetails()
   }
 
 }

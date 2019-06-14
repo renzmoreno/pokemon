@@ -58,14 +58,9 @@
             </div>
         </div> -->
         
-        <!-- <app-pokemon-evo-display [inputEvolvesFrom]=pokemonEvolvesFrom [inputEvolvesTo]=pokemonsEvolvesTo *ngIf="pokemonEvolvesFrom && pokemonsEvolvesTo"></app-pokemon-evo-display> -->
-        <app-pokemon-evo-display [inputEvolveDetList]=pokemonEvolutionDetailList *ngIf="pokemonEvolutionDetailList"></app-pokemon-evo-display>
-        <!-- <div class="moves">
-                <span>{{pokemonEvolvesFrom}}</span>
-        </div>
-        <div *ngFor="let evolvesTo of pokemonsEvolvesTo" class="moves">
-                <span>{{evolvesTo}}</span>
-        </div> -->
+        
+        <app-pokemon-evo-display [inputEvolveDetList]=pokemonEvolutionDetailList *ngIf="pokemonEvolutionDetailList[0]"></app-pokemon-evo-display>
+
         
         <div class="header_container"><span>Moves</span></div>
         <div class="vertical_flex_cont ">

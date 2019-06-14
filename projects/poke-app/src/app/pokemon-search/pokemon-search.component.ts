@@ -26,7 +26,7 @@ export class PokemonSearchComponent implements OnInit {
 
   search(term: string): void {
     // this.searchTerms.next(term);
-    this.pokemonName = term; 
+    this.pokemonName = term.toLocaleLowerCase(); 
     // this.router.navigate[term]
   }
 

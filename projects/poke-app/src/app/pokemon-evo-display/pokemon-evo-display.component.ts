@@ -15,6 +15,7 @@ export class PokemonEvoDisplayComponent implements OnInit {
   pokemonBase: PokemonEvolutionDetail = new PokemonEvolutionDetail();
   pokemonlevel1: PokemonEvolutionDetail[] = new Array();
   pokemonlevel2: PokemonEvolutionDetail[] = new Array();
+  isEvolving: boolean = false;
 
 
   constructor( private pokemonservice : PokemonService  ) { }
@@ -33,46 +34,48 @@ export class PokemonEvoDisplayComponent implements OnInit {
 // any changes on these will need to update this component and the pokemon-profile component
 
   buildPokemonEvolution(pokemonList: PokemonEvolutionDetail[]): void {
-    var name = pokemonList[0].name;
-    this.pokemonservice.getPokemonDetails(name).subscribe((details: PokemonDetails) =>{
+    // console.log(pokemonList[0].name);
+    // var name = pokemonList[0].name;
+    // this.pokemonservice.getPokemonDetails(name).subscribe((details: PokemonDetails) =>{
           
-            this.pokemonBase.img = details.sprites.front_default;
-            console.log(this.pokemonBase);
-          });
+    //         this.pokemonBase.img = details.sprites.front_default;
+    //         // console.log(this.pokemonBase);
+    //       });
    
-    // pokemonList.forEach(item => {
-    //   if(item.level === 0) {
-    //     this.pokemonBase = item;
-    //     this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
+    pokemonList.forEach(item => {
+      if(item.level === 0) {
+        this.pokemonBase = item;
+        this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
           
-    //       this.pokemonBase.img = details.sprites.front_default;
-    //       console.log(this.pokemonBase);
-    //     });
-    //   }
-      // if(item.level === 1) {
-      //     var pokemon: PokemonEvolutionDetail = new PokemonEvolutionDetail();
-      //     pokemon = item;
-      //     this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
-      //       pokemon.img = details.sprites.front_default;
-      //       console.log(pokemon);
-      //       this.pokemonlevel1.push(pokemon);
-      //     });
-      // }
-      // if(item.level === 2) {
-      //     var pokemon: PokemonEvolutionDetail = new PokemonEvolutionDetail();
-      //     pokemon = item;
-      //     this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
-      //       pokemon.img = details.sprites.front_default;
-      //       console.log(pokemon);
-      //       this.pokemonlevel2.push(pokemon);
-      //     });
-      // }
-    // });
+          this.pokemonBase.img = details.sprites.front_default;
+          // console.log(this.pokemonBase);
+        });
+      }
+      if(item.level === 1) {
+        this.isEvolving = true;
+          var pokemon: PokemonEvolutionDetail = new PokemonEvolutionDetail();
+          pokemon = item;
+          this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
+            pokemon.img = details.sprites.front_default;
+            // console.log(pokemon);
+            this.pokemonlevel1.push(pokemon);
+          });
+      }
+      if(item.level === 2) {
+          var pokemon: PokemonEvolutionDetail = new PokemonEvolutionDetail();
+          pokemon = item;
+          this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
+            pokemon.img = details.sprites.front_default;
+            console.log(pokemon);
+            this.pokemonlevel2.push(pokemon);
+          });
+      }
+    });
 
   }
 
   ngOnInit() {
-    console.log("init");
+    // console.log(this.inputEvolveDetList);
     this.buildPokemonEvolution(this.inputEvolveDetList);
       // this.getPokemonDetails(this.inputEvolvesFrom, 'PokemonTag');
       // this.inputEvolvesToList.forEach((element: string) => {

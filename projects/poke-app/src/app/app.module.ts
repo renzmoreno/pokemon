@@ -10,7 +10,8 @@ import { PokemonProfileComponent } from './pokemon-profile/pokemon-profile.compo
 import { AppRoutingModule } from './app-routing.module';
 import { PageSelectorComponent } from './page-selector/page-selector.component';
 import { PokemonSearchComponent } from './pokemon-search/pokemon-search.component';
-import { PokemonEvoDisplayComponent } from './pokemon-evo-display/pokemon-evo-display.component'
+import { PokemonEvoDisplayComponent } from './pokemon-evo-display/pokemon-evo-display.component';
+import { MoveComponent } from './move/move.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PokemonEvoDisplayComponent } from './pokemon-evo-display/pokemon-evo-di
     PokemonProfileComponent,
     PageSelectorComponent,
     PokemonSearchComponent,
-    PokemonEvoDisplayComponent
+    PokemonEvoDisplayComponent,
+    MoveComponent
   ],
   imports: [
     BrowserModule,

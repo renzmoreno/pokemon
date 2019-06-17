@@ -1,0 +1,43 @@
+<div *ngIf="moveDetails" >
+  <span (click)="toggleShow()"  
+        [ngClass]="{ 'moveName' : true,
+            'moveNameSel' : isDetailShown}"> 
+      {{moveDetails.name}}
+    </span>
+  <div [ngClass]="{ 'initdisplay' : true,
+  'hideDetail' : isDetailShown,
+  'fullBucket': true}">
+    <div class="typeBase {{moveDetails.type.name}}">{{moveDetails.type.name}}</div>
+    <div class="statsBlock "> 
+      <div *ngIf="moveDetails.accuracy; else noaccuracy" class="stats "> 
+        <span>Accurracy: {{moveDetails.accuracy}} % </span>
+      </div>
+      <ng-template #noaccuracy > 
+        <div class="stats ">
+          <span>Accurracy: N/A</span>
+        </div>
+      </ng-template>
+
+      <div *ngIf="moveDetails.power; else noPower" class="stats"> 
+          <span>Power: </span>{{moveDetails.power}}
+      </div>
+      <ng-template #noPower class="stats "> 
+        <div class="stats ">
+          <span>Power: N/A</span>
+        </div>
+      </ng-template>
+
+      <div *ngIf="moveDetails.pp; else noPP" class="stats "> 
+          <span>PP: </span>{{moveDetails.pp}}
+      </div>
+      <ng-template #noPP class="stats "> 
+        <div class="stats ">
+          <span>PP: N/A</span>3
+        </div> 
+      </ng-template>
+
+    </div>
+    <div> <p>{{moveDescription}} </div>
+    <div> <p>{{moveEffectDesc}} </p></div>
+  </div>
+</div>

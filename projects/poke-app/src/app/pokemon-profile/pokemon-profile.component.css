@@ -112,6 +112,14 @@ img {
 
 .moves {
     margin-left: 50px;
+    /* margin-bottom: 10px; */
+
+}
+
+.verticalMoves{
+    display: flex;
+    flex-direction: column;
+/*  border: 2px solid black; */
 }
 
 .typeBase {
@@ -166,4 +174,8 @@ img {
 
 .ghost {
     background-color: #906790;
+}
+
+.ground {
+    background-color: #6E491F;
 }

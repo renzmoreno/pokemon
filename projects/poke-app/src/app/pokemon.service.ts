@@ -5,6 +5,7 @@ import { Menu, PokemonTag } from './reponse-of-baseURL.model'
 import { PokemonDetails } from './response-details.model'
 import { PokemonSpecies } from './response-species.model'
 import { Evolution } from './response-evolution.model'
+import { MoveDetails } from './response-move.model'
 
 
 import { Observable, of } from 'rxjs';
@@ -19,29 +20,29 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class PokemonService {
 
 //  private pokemonUrl = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=21';
-  private baseUrl = 'https://pokeapi.co/api/v2/pokemon';
+  private baseUrl = 'https://pokeapi.co/api/v2/';
   private baseURLSpecies = 'https://pokeapi.co/api/v2/pokemon-species';
 
   getPokemons(num?: number): Observable<Menu> {
     if (num) {
       let offsetVal = (num-1)*32;
-      const url = `${this.baseUrl}?offset=${offsetVal}&limit=32`;
+      const url = `${this.baseUrl}pokemon?offset=${offsetVal}&limit=32`;
       return this.http.get<Menu>(url);
     }
     else {
-      const url = `${this.baseUrl}?offset=0&limit=32`;
+      const url = `${this.baseUrl}pokemon?offset=0&limit=32`;
       return this.http.get<Menu>(url);
     }
   }
 
   getPokemonDetails(name: string): Observable<PokemonDetails>{
-    const url = `${this.baseUrl}/${name}`
+    const url = `${this.baseUrl}pokemon/${name}`
     // console.log("url: " + url);
     return this.http.get<PokemonDetails>(url);
   }
 
   searchPokemonsByType(term: String) : Observable<Menu> {
-    const url = `${this.baseUrl}/${term}`
+    const url = `${this.baseUrl}pokemon/${term}`
     
     return  this.http.get<Menu>(url); 
   }
@@ -53,6 +54,12 @@ export class PokemonService {
 
   getPokemonEvolution(url: string): Observable<Evolution> {
     return this.http.get<Evolution>(url);
+  }
+
+  getMoveDetails(name: string): Observable<MoveDetails> {
+    const url = `${this.baseUrl}move/${name}`
+    return this.http.get<MoveDetails>(url);
+
   }
 
   // searchPokemons(term: string): Observable<PokemonDetails> {

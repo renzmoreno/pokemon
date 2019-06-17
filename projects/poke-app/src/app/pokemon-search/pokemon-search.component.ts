@@ -30,6 +30,13 @@ export class PokemonSearchComponent implements OnInit {
     // this.router.navigate[term]
   }
 
+  onSelect() {
+    var e = document.getElementById("option") as HTMLSelectElement;;
+    var sel = e.selectedIndex;
+    var opt = e.options[sel];
+    console.log(opt);
+  }
+
 
 
   ngOnInit() {

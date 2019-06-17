@@ -48,24 +48,16 @@
         </div>
 
         <div class="header_container"><span>Evolution</span></div>
-        <!-- <div *ngIf="pokemonEvolutionDetailList">
-            <div *ngFor="let pokemon of pokemonEvolutionDetailList" >
-                <span>{{pokemon.name}}</span> 
-                <span> {{pokemon.level}}</span>
-                <span> {{pokemon.minLevel}}</span>
-                <span> {{pokemon.trigger}}</span>
-                <span> {{pokemon.item}}</span>
-            </div>
-        </div> -->
-        
+    
         
         <app-pokemon-evo-display [inputEvolveDetList]=pokemonEvolutionDetailList *ngIf="pokemonEvolutionDetailList[0]"></app-pokemon-evo-display>
 
         
         <div class="header_container"><span>Moves</span></div>
-        <div class="vertical_flex_cont ">
+        <div class="verticalMoves">
             <div *ngFor="let move of details.moves" class="moves">
-                <span>{{move.move.name}}</span>
+                <app-move [inputMove]=move.move.name *ngIf="move.move.name"></app-move>
+                <!-- <span>{{move.move.name}}</span> -->
             </div>
         </div>
     </div>    

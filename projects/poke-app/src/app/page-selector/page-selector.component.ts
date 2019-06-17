@@ -21,6 +21,10 @@ export class PageSelectorComponent implements OnInit {
   currentPage : string;
 
   buildPages() : void {
+    // this.route.params.subscribe(parameter =>{
+    //   this.currentPage = parameter.pageNum;
+    //   console.log(this.currentPage)
+    // });
     this.pokemonService.getPokemons().subscribe((menu: Menu) => {
       
         let pokemonCount = menu.count;

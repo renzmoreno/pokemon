@@ -1,0 +1,118 @@
+span {
+    text-transform: capitalize;
+
+}
+
+.moveName {
+    font-family: 'Rancho', cursive;
+    font-size: 20px;
+}
+
+.moveNameSel {
+    text-align: center;
+    font-size: 30px;
+    background-color: #93B2C7;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.fullBucket{
+    background-color: #a5a5a5;
+    border-radius: 5px;
+}
+
+.testBorder {
+    border: 2px solid black;
+}
+
+.hideDetail {
+    display: block !important; 
+
+}
+
+.initdisplay {
+    display: none;
+}
+
+.statsBlock {
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.stats {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+}
+
+.moveDesc{
+    text-transform: Up
+}
+
+
+.typeBase {
+    background-color: #EBBB78;
+    /* margin-left: 3px;
+    margin-right: 3px; */
+    /* padding-left: 3px;
+    padding-right: 3px; */
+    /* padding: 2px; */
+    /* border-style: solid; */
+    /* border-width: 1px; */
+    /* border-radius: 5px; */
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-transform: capitalize;
+    font-family: 'Rancho', cursive;
+    font-size: 21px;
+    text-align: center;
+}
+
+.grass {
+    background-color: green;
+}
+
+.water {
+    background-color:#616EFF;
+}
+
+.fire {
+    background-color: red;
+}
+
+.poison {
+    background-color: violet;
+}
+
+.electric {
+    background-color: yellow;
+}
+
+.dark {
+    background-color: #5A5979;
+    /* color: white; */
+    /* background-color: black; */
+}
+
+.flying {
+    background-color: #93B2C7;
+}
+
+.ice {
+    background-color: #D9EFF8;
+}
+
+.fairy{
+    background-color: #EA1369;
+}
+
+.ghost {
+    background-color: #906790;
+}
+
+.ground {
+    background-color: #6E491F;
+}
+
+

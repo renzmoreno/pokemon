@@ -1,12 +1,22 @@
 <div id="search-component">
-  <label for="search-box">Search by Name: </label>
- 
-  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
-  <!-- <input #searchBox id="search-box"  /> -->
-  <button routerLink="/pokemon/{{pokemonName}}"> Search </button>
- 
-  <select id="option" name="searchOption" onclick="onSelect()">
-      <option value="byType">byType</option>
-      <option value="byName">byName</option>
+  <!-- <label for="search-box">Search by Name: </label> -->
+  <select id="functionOptions" name="searchOption"  (change)="onSelectFunction()">
+      <option value="searchByName">Search by Name</option>
+      <option value="ListByType" >List Pokemon by Type</option>
    </select>
+ 
+   <div *ngIf='functionType === "searchByName"; else ListByType' >
+         <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+         <!-- <input #searchBox id="search-box"  /> -->
+         <button routerLink="/pokemon/{{pokemonName}}"> Search </button>
+   </div>
+   <ng-template #ListByType>
+         <select id="typeOptions" name="poketypeOption"  (change)="onSelect()">
+               <option value="all">all</option>
+               <option value="Electric" >Electric</option>
+            </select>
+   </ng-template>
+  
+ 
+
 </div>

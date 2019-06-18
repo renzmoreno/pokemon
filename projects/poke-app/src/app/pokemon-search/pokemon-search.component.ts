@@ -18,6 +18,7 @@ export class PokemonSearchComponent implements OnInit {
   // pokemon$ : Observable<PokemonDetails>;
   // private searchTerms = new Subject<string>();
   pokemonName: String;
+  functionType: string;
 
 
   constructor( private pokemonService : PokemonService,
@@ -30,17 +31,18 @@ export class PokemonSearchComponent implements OnInit {
     // this.router.navigate[term]
   }
 
-  onSelect() {
-    var e = document.getElementById("option") as HTMLSelectElement;;
+  onSelectFunction() {
+    var e = document.getElementById("functionOptions") as HTMLSelectElement;
     var sel = e.selectedIndex;
-    var opt = e.options[sel];
+    var opt = e.options[sel].value;
+    this.functionType = opt;
     console.log(opt);
   }
 
 
 
   ngOnInit() {
-    
+    this.functionType = "searchByName";
     // this.pokemon$ = this.searchTerms.pipe(
     //   // wait 300ms after each keystroke before considering the term
     //   // debounceTime(300),

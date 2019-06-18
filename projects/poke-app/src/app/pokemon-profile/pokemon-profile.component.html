@@ -32,7 +32,7 @@
 
         <div class="header_container"><span>Profile</span></div>
         <div class="vertical_flex_cont blockMargin ">
-                <div >
+                <div *ngIf="description">
                     <p>{{description}}</p>
                 </div>     
                 <div class="horizontal_flex_cont "> 

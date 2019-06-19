@@ -66,7 +66,7 @@ export class PokemonEvoDisplayComponent implements OnInit {
           pokemon = item;
           this.pokemonservice.getPokemonDetails(item.name).subscribe((details: PokemonDetails) =>{
             pokemon.img = details.sprites.front_default;
-            console.log(pokemon);
+            // console.log(pokemon);
             this.pokemonlevel2.push(pokemon);
           });
       }

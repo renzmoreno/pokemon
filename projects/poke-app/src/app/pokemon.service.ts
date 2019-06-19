@@ -6,6 +6,7 @@ import { PokemonDetails } from './response-details.model'
 import { PokemonSpecies } from './response-species.model'
 import { Evolution } from './response-evolution.model'
 import { MoveDetails } from './response-move.model'
+import { AllPokemonTypes,TypeDetails } from './response-type.model';
 
 
 import { Observable, of } from 'rxjs';
@@ -13,6 +14,7 @@ import { Observable, of } from 'rxjs';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +51,11 @@ export class PokemonService {
 
   getPokemonSpecies(name: String): Observable<PokemonSpecies> {
     const url = `${this.baseURLSpecies}/${name}`
-    return this.http.get<PokemonSpecies>(url);
+    // console.log(url);
+    return this.http.get<PokemonSpecies>(url).pipe(
+      
+      catchError(this.handleError<PokemonSpecies>('getSpecies',)));
+    // return this.http.get<PokemonSpecies>(url);
   }
 
   getPokemonEvolution(url: string): Observable<Evolution> {
@@ -60,6 +66,17 @@ export class PokemonService {
     const url = `${this.baseUrl}move/${name}`
     return this.http.get<MoveDetails>(url);
 
+  }
+
+  getPokemonTypes(): Observable<AllPokemonTypes> {
+    const url = `${this.baseUrl}type`
+    return this.http.get<AllPokemonTypes>(url);
+  }
+
+  getPokemonByType(type: string): Observable<TypeDetails> {
+    const url = `${this.baseUrl}type/${type}`
+    // console.log(url);
+    return this.http.get<TypeDetails>(url);
   }
 
   // searchPokemons(term: string): Observable<PokemonDetails> {

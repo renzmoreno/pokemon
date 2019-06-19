@@ -11,10 +11,13 @@
          <button routerLink="/pokemon/{{pokemonName}}"> Search </button>
    </div>
    <ng-template #ListByType>
-         <select id="typeOptions" name="poketypeOption"  (change)="onSelect()">
-               <option value="all">all</option>
-               <option value="Electric" >Electric</option>
-            </select>
+       <select  id="typeOptions" name="Option"  (change)="onSelectType()">
+            <option *ngFor="let type of pokemonTypes" value={{type}}>{{type | uppercase}} </option>
+            
+         </select>
+         <!-- <form *ngFor="let type of pokemonTypes">
+             <input id="typeOptions" type="checkbox" name="pokemonTypes" value={{type}} (change)="test()"> {{type}}<br>
+           </form> -->
    </ng-template>
   
  

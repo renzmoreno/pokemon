@@ -5,6 +5,7 @@ import {
 } from 'rxjs/operators';
 import { Observable, Subject  } from 'rxjs';
 import { PokemonDetails } from '../response-details.model'
+import { AllPokemonTypes } from '../response-type.model'
 
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -19,7 +20,7 @@ export class PokemonSearchComponent implements OnInit {
   // private searchTerms = new Subject<string>();
   pokemonName: String;
   functionType: string;
-
+  pokemonTypes: string[] = new Array();
 
   constructor( private pokemonService : PokemonService,
               private route: ActivatedRoute,
@@ -39,10 +40,38 @@ export class PokemonSearchComponent implements OnInit {
     console.log(opt);
   }
 
+  onSelectType() {
+    var e = document.getElementById("typeOptions") as HTMLSelectElement;
+    var sel = e.selectedIndex;
+    var opt = e.options[sel].value;
+    this.functionType = opt;
+    // console.log(opt);
+    this.router.navigate(['pokemon/byType/' + opt]);
+  }
+
+  getPokemonTypes() {
+    this.pokemonService.getPokemonTypes().subscribe((response: AllPokemonTypes) => {
+      this.pokemonTypes.push("ALL");
+      response.results.forEach(item => {
+        // console.log(item.name);
+        
+        this.pokemonTypes.push(item.name);
+      });
+      this.pokemonTypes.sort();
+
+    })
+  }
+
+  test() {
+    console.log("dfdf");
+  }
+
 
 
   ngOnInit() {
     this.functionType = "searchByName";
+    this.getPokemonTypes();
+    // this.pokemonTypes = ["electric", "dark"];
     // this.pokemon$ = this.searchTerms.pipe(
     //   // wait 300ms after each keystroke before considering the term
     //   // debounceTime(300),

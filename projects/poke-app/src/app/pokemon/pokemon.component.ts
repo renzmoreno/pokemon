@@ -6,6 +6,8 @@ import { Location } from '@angular/common'
 
 import { PokemonService } from '../pokemon.service';
 import { PokemonTag } from '../reponse-of-baseURL.model';
+import { TypeDetails } from '../response-type.model';
+// import { timingSafeEqual } from 'crypto';
 
 
 
@@ -16,9 +18,11 @@ import { PokemonTag } from '../reponse-of-baseURL.model';
 })
 export class PokemonComponent implements OnInit {
 
-  pokemonTags : PokemonTag[];
+  pokemonTags : PokemonTag[] = new Array();
+  pokemonTag : PokemonTag;
   page: number;
-  
+
+
   constructor( 
     private pokemonservice: PokemonService,
     private route: ActivatedRoute,
@@ -26,23 +30,67 @@ export class PokemonComponent implements OnInit {
 
     ) { }
 
-  getPokemons() : void {   
-    this.route.params.subscribe(parameter => {
-      // console.log(parameter.pageNum)
+  // getPokemons() : void {   
+  //   this.route.params.subscribe(parameter => {
+  //     // console.log(parameter.pageNum)
       
-      this.pokemonservice.getPokemons(parameter.pageNum).subscribe(pokemons => {
+  //     this.pokemonservice.getPokemons(parameter.pageNum).subscribe(pokemons => {
+  //       // console.log(pokemons.results);
+  //       this.pokemonTags = pokemons.results;
+  //     });
+  //   });
+  // }
+
+  getPokemons(num: number) : void {   
+    this.pokemonTags = [];      
+      this.pokemonservice.getPokemons(num).subscribe(pokemons => {
         // console.log(pokemons.results);
         this.pokemonTags = pokemons.results;
       });
+
+  }
+
+  // getPokemonsBytype() : void {
+    
+  //   this.route.params.subscribe(parameter => {
+  //     console.log();
+  //     this.pokemonservice.getPokemonByType(parameter.pageNum).subscribe((typeDetails: TypeDetails) => {
+  //       typeDetails.pokemon.forEach(item => {
+  //         this.pokemonTags.push(item.pokemon);
+  //       })
+  //       console.log(this.pokemonTags);
+  //       // this.pokemonTag = typeDetails.pokemon[0].pokemon
+  //     });
+  //   });
+  // }
+
+  getPokemonsBytype(pageNum: string) : void {
+    this.pokemonTags = [];      
+    
+
+      this.pokemonservice.getPokemonByType(pageNum).subscribe((typeDetails: TypeDetails) => {
+        typeDetails.pokemon.forEach(item => {
+          this.pokemonTags.push(item.pokemon);
+        })
+        console.log(this.pokemonTags);
+        // this.pokemonTag = typeDetails.pokemon[0].pokemon
+      });
+
+  }
+
+  buildDisplay() : void {
+    this.route.params.subscribe(parameter => {
+      if(parameter.display === "page"){
+        // console.log("display by page");
+        this.getPokemons(parameter.pageNum);
+      }else if(parameter.display === "byType") {
+        // console.log("display by type");
+        this.getPokemonsBytype(parameter.pageNum);
+        
+      } else{
+        console.log(parameter.display);
+      }
     });
-    
-    
-    
-    // console.log("pageNum " + page);
-    // this.pokemonservice.getPokemons(page).subscribe(pokemons => {
-    //   // console.log(pokemons.results);
-    //   this.pokemonTags = pokemons.results;
-    // });
   }
 
 
@@ -51,8 +99,9 @@ export class PokemonComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.getPokemons();
-
+    // this.getPokemons();
+    this.buildDisplay();
+    // this.getPokemonsBytype();
   }
 
 }

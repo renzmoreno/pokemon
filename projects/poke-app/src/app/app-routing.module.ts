@@ -7,10 +7,9 @@ import { PokemonEvoDisplayComponent } from './pokemon-evo-display/pokemon-evo-di
 
 
 const routes: Routes = [
-  { path: 'pokemon/page/:pageNum', component: PokemonComponent },
+  { path: 'pokemon/:display/:pageNum', component: PokemonComponent },
   { path: '', redirectTo: '/pokemon/page/1', pathMatch: 'full' },
-  { path: 'pokemon/:name', component: PokemonProfileComponent},
-  { path: 'pokemon/:name', component: PokemonEvoDisplayComponent}
+  { path: 'pokemon/:name', component: PokemonProfileComponent}
 
 ];
 

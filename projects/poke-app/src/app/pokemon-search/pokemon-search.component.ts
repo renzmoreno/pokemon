@@ -39,7 +39,10 @@ export class PokemonSearchComponent implements OnInit {
     var sel = e.selectedIndex;
     var opt = e.options[sel].value;
     this.functionType = opt;
-    console.log(opt);
+    if(opt === "searchByName"){
+      this.pageDataService.clear();
+    }
+    // console.log(opt);
   }
 
   onSelectType() {
@@ -70,6 +73,12 @@ export class PokemonSearchComponent implements OnInit {
       this.pageDataService.add(type);
     } else {
       this.pageDataService.remove(type);
+      var currPage = this.route.snapshot.paramMap.get('pageNum')
+      console.log(this.route.snapshot.paramMap.get('pageNum'));
+      if (currPage === type){
+        console.log("need to reroute");
+        this.router.navigate(['pokemon/byType/' + this.pageDataService.pageData[0]]);
+      }
     }
   }
 

@@ -10,9 +10,10 @@
 
 <div *ngIf="pageDataService.pageData.length">
 
-    <div ngFor="let pageData of pageDataService.pageData">
-        {{pageDataService.pageData}}
-        <!-- {{pageDataService.pageData}} -->
+    <div *ngFor="let page of pageDataService.pageData"
+    routerLink="/pokemon/byType/{{page}}" >
+        {{page}}
+
     </div>
 
 </div>

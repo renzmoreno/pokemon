@@ -47,12 +47,23 @@ export class PageSelectorComponent implements OnInit {
     this.currentPage = pageNum; 
   }
 
+  changePage(){
+    this.route.params.subscribe(parameter => {
+      console.log("change page");
+      console.log(parameter.pageNum);
+      var index = this.pageDataService.pageData.indexOf(parameter.pageNum);
+      if (index === -1){
+        console.log("need to change page");
+      }
+    });
+  }
   
 
   ngOnInit() {
     // console.log(this.pageDataService.pageData);
     // this.setCurrentPage ("1");
     // this.buildPages();
+    this.changePage();
 
     
         

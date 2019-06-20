@@ -8,6 +8,7 @@ import { PokemonDetails } from '../response-details.model'
 import { AllPokemonTypes } from '../response-type.model'
 
 import { ActivatedRoute, Router } from '@angular/router'
+import { PageDataService } from '../page-data-service'
 
 
 @Component({
@@ -24,7 +25,8 @@ export class PokemonSearchComponent implements OnInit {
 
   constructor( private pokemonService : PokemonService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              public pageDataService: PageDataService) { }
 
   search(term: string): void {
     // this.searchTerms.next(term);
@@ -62,8 +64,13 @@ export class PokemonSearchComponent implements OnInit {
     })
   }
 
-  test() {
-    console.log("dfdf");
+  test(isChecked: boolean, type: string) {
+    console.log(isChecked + ' ' +type);
+    if(isChecked){
+      this.pageDataService.add(type);
+    } else {
+      this.pageDataService.remove(type);
+    }
   }
 
 

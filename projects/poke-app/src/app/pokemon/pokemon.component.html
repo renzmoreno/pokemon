@@ -1,13 +1,18 @@
-<app-pokemon-search></app-pokemon-search>
-<app-page-selector></app-page-selector>
+<!-- <app-pokemon-search></app-pokemon-search> -->
+<!-- <app-page-selector></app-page-selector> -->
 <div>
   <ul class="flex-row-container">
     <div *ngFor="let pokemon of pokemonTags" class="badge" >
       
       <app-pokemon-detail [name]=pokemon.name > </app-pokemon-detail>
-
+ 
     </div>
   </ul>
+</div>
+<div *ngIf="isPokemonsAvailable === false">
+  <h2>
+    No Pokemons of this type to display!!!
+  </h2>
 </div>
 
 

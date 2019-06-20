@@ -6,6 +6,8 @@ export class PokemonEvolutionDetail {
     item: string;
     trigger: string;
     minLevel: number;
+   
+    speciesURL: string;
     img: string;
 
     constructor (){

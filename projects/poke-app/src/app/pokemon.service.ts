@@ -9,10 +9,10 @@ import { MoveDetails } from './response-move.model'
 import { AllPokemonTypes,TypeDetails } from './response-type.model';
 
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 
 
@@ -40,7 +40,7 @@ export class PokemonService {
   getPokemonDetails(name: string): Observable<PokemonDetails>{
     const url = `${this.baseUrl}pokemon/${name}`
     // console.log("url: " + url);
-    return this.http.get<PokemonDetails>(url);
+    return this.http.get<PokemonDetails>(url).pipe(catchError(this.handleError2));
   }
 
   searchPokemonsByType(term: String) : Observable<Menu> {
@@ -56,6 +56,10 @@ export class PokemonService {
       
       catchError(this.handleError<PokemonSpecies>('getSpecies',)));
     // return this.http.get<PokemonSpecies>(url);
+  }
+
+  getPokemonSpeciesbyURL(url: string): Observable<PokemonSpecies> {
+      return this.http.get<PokemonSpecies>(url);
   }
 
   getPokemonEvolution(url: string): Observable<Evolution> {
@@ -95,6 +99,23 @@ export class PokemonService {
 
   constructor(
     private http: HttpClient  ) { }
+
+
+    private handleError2(error: HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.error('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.log(
+          `Backend returned code ${error.status}, ` +
+          `body was: ${error.error}`);
+      }
+      // return an observable with a user-facing error message
+      return throwError(
+        'Something bad happened; please try again later.');
+    };
 
   private handleError<T> (operation = 'operation', result?: T) {
    return (error: any): Observable<T> => {  

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service'
 import { Menu } from '../reponse-of-baseURL.model'
 import { ActivatedRoute } from '@angular/router'
+import { PageDataService } from '../page-data-service'
 
 @Component({
   selector: 'app-page-selector',
@@ -12,11 +13,12 @@ export class PageSelectorComponent implements OnInit {
 
   constructor(
     private pokemonService : PokemonService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public pageDataService : PageDataService
     ) { }
 
   totalPageCount : number;
-  // pages: string[] = new Array();
+  // pages: string[] = new Array(); 
   pages: number[] =  new Array(); 
   currentPage : string;
 
@@ -48,8 +50,10 @@ export class PageSelectorComponent implements OnInit {
   
 
   ngOnInit() {
+    // console.log(this.pageDataService.pageData);
     // this.setCurrentPage ("1");
-    this.buildPages();
+    // this.buildPages();
+
     
         
   }

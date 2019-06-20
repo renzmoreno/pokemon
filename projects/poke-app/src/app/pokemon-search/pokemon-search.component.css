@@ -2,6 +2,15 @@
     width: 200px;
     height: 20px;
   }
+
+  .boxes {
+   
+    height: 25px;
+  }
+
+  .dispInline {
+    display: inline;
+  }
    
    
- 
+  

@@ -1,25 +1,25 @@
-<div id="search-component">
+<div id="search-component" class="dispInline">
   <!-- <label for="search-box">Search by Name: </label> -->
-  <select id="functionOptions" name="searchOption"  (change)="onSelectFunction()">
-      <option value="searchByName">Search by Name</option>
+  <select id="functionOptions" name="searchOption"  (change)="onSelectFunction()" class="boxes">
+      <option value="searchByName" >Search by Name</option>
       <option value="ListByType" >List Pokemon by Type</option>
    </select>
  
-   <div *ngIf='functionType === "searchByName"; else ListByType' >
+   <div *ngIf='functionType === "searchByName"; else ListByType' class="dispInline">
          <input #searchBox id="search-box" (input)="search(searchBox.value)" />
          <!-- <input #searchBox id="search-box"  /> -->
-         <button routerLink="/pokemon/{{pokemonName}}"> Search </button>
+         <button routerLink="/pokemon/{{pokemonName}}" class="boxes"> Search </button>
    </div>
-   <ng-template #ListByType>
-       <select  id="typeOptions" name="Option"  (change)="onSelectType()">
+   <ng-template #ListByType >
+        <!-- <select  id="typeOptions" name="Option"  (change)="onSelectType()" class="boxes">
             <option *ngFor="let type of pokemonTypes" value={{type}}>{{type | uppercase}} </option>
             
-         </select>
-         <!-- <form *ngFor="let type of pokemonTypes">
-             <input id="typeOptions" type="checkbox" name="pokemonTypes" value={{type}} (change)="test()"> {{type}}<br>
-           </form> -->
+        </select> -->
+        <form *ngFor="let type of pokemonTypes">
+             <input id={{type}} type="checkbox" name="pokemonTypes" value={{type}} (change)="test($event.target.checked, type)" [checked]="pokemonTypes.checked"> {{type}}<br>
+        </form>
    </ng-template>
   
- 
+  
 
 </div>

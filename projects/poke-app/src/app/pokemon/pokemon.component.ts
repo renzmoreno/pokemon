@@ -19,8 +19,9 @@ import { TypeDetails } from '../response-type.model';
 export class PokemonComponent implements OnInit {
 
   pokemonTags : PokemonTag[] = new Array();
-  pokemonTag : PokemonTag;
-  page: number;
+  isPokemonsAvailable : boolean;
+  // pokemonTag : PokemonTag;
+  // page: number;
 
 
   constructor( 
@@ -46,7 +47,10 @@ export class PokemonComponent implements OnInit {
       this.pokemonservice.getPokemons(num).subscribe(pokemons => {
         // console.log(pokemons.results);
         this.pokemonTags = pokemons.results;
-      });
+      }, err => {
+        console.log("pokemon component error");
+        this.isPokemonsAvailable = false;
+    });
 
   }
 
@@ -73,12 +77,20 @@ export class PokemonComponent implements OnInit {
           this.pokemonTags.push(item.pokemon);
         })
         console.log(this.pokemonTags);
+        if(!this.pokemonTags.length){
+          this.isPokemonsAvailable = false;
+        }
+        
         // this.pokemonTag = typeDetails.pokemon[0].pokemon
+      },  err => {
+          console.log(err);
+          this.isPokemonsAvailable = false;
       });
 
   }
 
   buildDisplay() : void {
+    this.isPokemonsAvailable = true;
     this.route.params.subscribe(parameter => {
       if(parameter.display === "page"){
         // console.log("display by page");

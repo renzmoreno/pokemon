@@ -29,6 +29,7 @@ export class PokemonProfileComponent implements OnInit {
   // pokemonsEvolvesTo: String[] = new Array();
   pokemonEvolutionDetailList: PokemonEvolutionDetail[] = new Array();
   lvl: number; 
+  isAPokemon: boolean;
 
 
   constructor(
@@ -38,6 +39,8 @@ export class PokemonProfileComponent implements OnInit {
   ) {}
  
   getPokemonDetails(): void {
+    this.isAPokemon = true;
+
     // const name  = this.route.snapshot.paramMap.get('name');
     const name = this.route.params.subscribe(parameter => {
       this.pokemonService.getPokemonDetails(parameter.name).subscribe((details: PokemonDetails) => {
@@ -49,7 +52,10 @@ export class PokemonProfileComponent implements OnInit {
         // console.log("dfdfs");
         // console.log(details.species.name);
         this.getPokemonSpeciesDetails(details.species.name);
-      })
+      }, err => {
+        console.log("pokemon component error");
+        this.isAPokemon = false;
+      });
     });
 
   }
@@ -78,16 +84,17 @@ export class PokemonProfileComponent implements OnInit {
                 var evoPokemonbase = new PokemonEvolutionDetail();
                 evoPokemonbase.level = this.lvl;
                 evoPokemonbase.name = evolution.chain.species.name;
+                evoPokemonbase.speciesURL = evolution.chain.species.url;
                 this.pokemonEvolutionDetailList.push(evoPokemonbase);
   
 
                 evolution.chain.evolves_to.forEach((evolvesTo, index) => {
                     var i = index;
-                    console.log(i);
                     let evoLvl1 = evolvesTo
                     var evoPokemon = new PokemonEvolutionDetail();
                     evoPokemon.level = this.lvl + 1;
                     evoPokemon.name = evoLvl1.species.name;
+                    evoPokemon.speciesURL = evoLvl1.species.url;
                     if (evoLvl1.evolution_details[0].min_level){
                       evoPokemon.minLevel = evoLvl1.evolution_details[0].min_level;
                     }
@@ -106,6 +113,7 @@ export class PokemonProfileComponent implements OnInit {
                         var evoPokemon = new PokemonEvolutionDetail();
                         evoPokemon.level = this.lvl + 2;
                         evoPokemon.name = evoLvl2.species.name;
+                        evoPokemon.speciesURL = evoLvl2.species.url;
                         if (evoLvl2.evolution_details[0].min_level){
                           evoPokemon.minLevel = evoLvl2.evolution_details[0].min_level;
                         }
@@ -118,55 +126,8 @@ export class PokemonProfileComponent implements OnInit {
                         }
                         this.pokemonEvolutionDetailList.push(evoPokemon);
                     });
-
                 });
-                // evolution.chain.evolves_to.forEach(evolvesTo => {
-                //   let evolves = evolvesTo; 
-                  
-                //   // do {
-                //     console.log(evolves);
-                //     var evoPokemon = new PokemonEvolutionDetail();
-                //     evoPokemon.level = this.lvl + 1;
-                //     evoPokemon.name = evolves.species.name;
-                //     if (evolves.evolution_details[0].min_level){
-                //       evoPokemon.minLevel = evolves.evolution_details[0].min_level;
-                //     }
-                //     if(evolves.evolution_details[0].item){
-                //       // console.log(evolves.evolution_details[0].item);
-                //       evoPokemon.item = evolves.evolution_details[0].item.name;
-                //     }
-                //     if(evolves.evolution_details[0].trigger){
-                //       evoPokemon.trigger = evolves.evolution_details[0].trigger.name;
-                //     }
-                    
-                //     this.pokemonEvolutionDetailList.push(evoPokemon);
-  
-                //   // } while (!evolves) 
-  
-                //   if (evolvesTo.evolves_to[0]){
-                //     var evoPokemon = new PokemonEvolutionDetail();
-                //     evoPokemon.level = this.pokemonEvolutionDetailList[this.pokemonEvolutionDetailList.length-1].level + 1;
-                //     evoPokemon.name = evolvesTo.evolves_to[0].species.name;
-  
-                //     if (evolvesTo.evolves_to[0].evolution_details[0].min_level){
-                //       evoPokemon.minLevel = evolvesTo.evolves_to[0].evolution_details[0].min_level;
-                //     }
-                //     if(evolvesTo.evolves_to[0].evolution_details[0].item){
-                //       // console.log(evolvesTo.evolves_to[0].evolution_details[0].item);
-                //       evoPokemon.item = evolvesTo.evolves_to[0].evolution_details[0].item.name;
-                //     }
-                //     if(evolvesTo.evolves_to[0].evolution_details[0].trigger){
-                //       evoPokemon.trigger = evolvesTo.evolves_to[0].evolution_details[0].trigger.name;
-                //     }
-  
-                //     // console.log(evolvesTo.evolves_to[0]);
-                    
-                //     this.pokemonEvolutionDetailList.push(evoPokemon);
-  
-                //   }
-                // });
           }); 
-          
       });
 
     

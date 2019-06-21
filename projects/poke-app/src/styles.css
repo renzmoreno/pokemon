@@ -6,3 +6,80 @@ body {
     /* background-image: url('https://images.designtrends.com/wp-content/uploads/2016/02/14190504/Pokeman-Wallpapers.jpg'); */
     
 }
+
+
+#grass {
+    background-color: green;
+}
+
+#water {
+    background-color:#616EFF;
+}
+
+#fire {
+    background-color: red;
+}
+
+#poison {
+    background-color: violet;
+}
+
+#electric {
+    background-color: yellow;
+}
+
+#dark {
+    background-color: #5A5979;
+}
+
+#flying {
+    background-color: #93B2C7;
+}
+
+#ice {
+    background-color: #D9EFF8;
+}
+
+#fairy{
+    background-color: #EA1369;
+}
+
+#ghost {
+    background-color: #906790;
+}
+
+#ground {
+    background-color: #6E491F;
+}
+
+#bug {
+    background-color: #3D974B;
+}
+
+#dragon{
+    background-color: #8B76FF;
+}
+
+#fighting{
+    background-color: #A95542;
+}
+
+#psychic{
+    background-color: #FA65B7;
+}
+
+#rock{
+    background-color: rgb(95, 52, 40);
+}
+
+#shadow{
+    background-color: rgba(146, 146, 146, 0.856);
+}
+
+#steel{
+    background-color: #C3C2D6;
+}
+
+#unknown{
+    background-color: rgb(145, 143, 173);
+}

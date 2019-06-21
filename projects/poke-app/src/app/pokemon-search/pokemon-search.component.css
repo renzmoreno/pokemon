@@ -1,3 +1,7 @@
+.testborder{
+  border: 2px solid black;
+}  
+  
   #search-box {
     width: 200px;
     height: 20px;
@@ -8,8 +12,22 @@
     height: 25px;
   }
 
+  .checkboxes{
+    width: 90px;
+    margin: 2px;
+    
+    text-transform: capitalize;
+  }
+
   .dispInline {
     display: inline;
+  }
+
+  .checkbox_container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* justify-content: space-around; */
   }
    
    

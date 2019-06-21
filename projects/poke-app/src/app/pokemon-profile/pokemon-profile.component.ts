@@ -3,15 +3,15 @@ import { PokemonService } from '../pokemon.service'
 import { PokemonDetails,Types } from '../response-details.model'
 import { PokemonSpecies, FlavorTextEntry } from '../response-species.model'
 import { Evolution, EvolvesTo } from '../response-evolution.model'
-// import { PokemonEvolutionDetail } from '../pokemon'
+
 
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { ConstantPool } from '@angular/compiler';
-import { PokemonEvolutionDetail } from '../pokemon';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
-// import { Rx } from 'rxjs'
+import { PokemonEvolutionDetail } from '../pokemon';
+
+
+
 
 @Component({
   selector: 'app-pokemon-profile',
@@ -26,7 +26,6 @@ export class PokemonProfileComponent implements OnInit {
   types: Types[];
   description: String;
   pokemonEvolvesFrom : string;
-  // pokemonsEvolvesTo: String[] = new Array();
   pokemonEvolutionDetailList: PokemonEvolutionDetail[] = new Array();
   lvl: number; 
   isAPokemon: boolean;
@@ -41,7 +40,7 @@ export class PokemonProfileComponent implements OnInit {
   getPokemonDetails(): void {
     this.isAPokemon = true;
 
-    // const name  = this.route.snapshot.paramMap.get('name');
+
     const name = this.route.params.subscribe(parameter => {
       this.pokemonService.getPokemonDetails(parameter.name).subscribe((details: PokemonDetails) => {
         this.details = details;
@@ -49,7 +48,6 @@ export class PokemonProfileComponent implements OnInit {
         this.types =  details.types;
         // console.log(this.types);
         this.imgSrc = details.sprites.front_default;
-        // console.log("dfdfs");
         // console.log(details.species.name);
         this.getPokemonSpeciesDetails(details.species.name);
       }, err => {
@@ -59,10 +57,6 @@ export class PokemonProfileComponent implements OnInit {
     });
 
   }
-
-  // getPokemonSpeciesDetails(): void {
-    // const name  = this.route.snapshot.paramMap.get('name');
-    // const name = this.route.params.subscribe(parameter =>{
 
   getPokemonSpeciesDetails(name: string): void {
       this.pokemonService.getPokemonSpecies(name).subscribe((species: PokemonSpecies) => {
@@ -141,7 +135,7 @@ export class PokemonProfileComponent implements OnInit {
   ngOnInit() {
     
     this.getPokemonDetails();
-    // this.getPokemonSpeciesDetails()
+
   }
 
 }

@@ -22,22 +22,15 @@ export class PokemonEvoDisplayComponent implements OnInit {
   constructor( private pokemonservice : PokemonService  ) { }
 
 // based on how I coded the retrieval of inputEvolveDetList
-// 1. only one base pokemon (level 0 inside the class)
-// 2. level 0 will level up to level 1.
+// 1. only one base pokemon (level 0 inside the class) 
+// 2. level 0 will level up to level 1. no level up jump
 // 3. multiple level 1 and level 2 may occur. 
 // 4. highest level of evolution is only upto lvl 2
 
 // any changes on these will need to update this component and the pokemon-profile component
 
   buildPokemonEvolution(pokemonList: PokemonEvolutionDetail[]): void {
-    // console.log(pokemonList[0].name);
-    // var name = pokemonList[0].name;
-    // this.pokemonservice.getPokemonDetails(name).subscribe((details: PokemonDetails) =>{
-          
-    //         this.pokemonBase.img = details.sprites.front_default;
-    //         // console.log(this.pokemonBase);
-    //       });
-   
+     
     pokemonList.forEach(item => {
       if(item.level === 0) {
         this.pokemonBase = item;
@@ -86,13 +79,7 @@ export class PokemonEvoDisplayComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log(this.inputEvolveDetList);
     this.buildPokemonEvolution(this.inputEvolveDetList);
-      // this.getPokemonDetails(this.inputEvolvesFrom, 'PokemonTag');
-      // this.inputEvolvesToList.forEach((element: string) => {
-      //   this.getPokemonDetails(element, 'PokemonTag[]')
-      // });
-
   }
 
 }

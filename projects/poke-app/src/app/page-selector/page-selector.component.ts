@@ -23,10 +23,7 @@ export class PageSelectorComponent implements OnInit {
   currentPage : string;
 
   buildPages() : void {
-    // this.route.params.subscribe(parameter =>{
-    //   this.currentPage = parameter.pageNum;
-    //   console.log(this.currentPage)
-    // });
+
     this.pokemonService.getPokemons().subscribe((menu: Menu) => {
       
         let pokemonCount = menu.count;
@@ -34,36 +31,26 @@ export class PageSelectorComponent implements OnInit {
         for (var i=0; i < this.totalPageCount; i++){
             this.pages.push(i+1);
         }
-        // console.log(this.pages);
-        // this.setCurrentPage ("1");
       });
   }
 
-  setCurrentPage (pageNum ) {
-    // this.route.params.subscribe(respo => {
-    //   // this.currentPage = pageNum; 
-    //   console.log(respo.pageNum);
-    // });
-    this.currentPage = pageNum; 
-  }
+  // setCurrentPage (pageNum ) {
 
-  changePage(){
-    this.route.params.subscribe(parameter => {
-      console.log("change page");
-      console.log(parameter.pageNum);
-      var index = this.pageDataService.pageData.indexOf(parameter.pageNum);
-      if (index === -1){
-        console.log("need to change page");
-      }
-    });
-  }
+  //   this.currentPage = pageNum; 
+  // }
+
+
   
+  getCurrentPage (){
+    this.route.params.subscribe(parameter =>{
+      console.log(parameter.pageNum);
+      this.pageDataService.currentPage = parameter.pageNum;
+    })
+  }
 
   ngOnInit() {
-    // console.log(this.pageDataService.pageData);
-    // this.setCurrentPage ("1");
-    // this.buildPages();
-    this.changePage();
+    this.getCurrentPage();
+
 
     
         

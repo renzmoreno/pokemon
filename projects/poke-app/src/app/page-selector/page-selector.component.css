@@ -1,6 +1,16 @@
+.noList{
+    /* border: 2px solid black; */
+    text-align: Center;
+    background-color: rgb(125, 137, 139);
+    height: 30px;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
 .horizontal_flex_cont {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
@@ -8,6 +18,7 @@
 .page{
     padding-right: 5px;
     padding-left: 5px;
+    text-align: center;
 }
 
 .page:hover{
@@ -18,4 +29,20 @@
 .current-page {
     font-weight: bold;
     background: white;
+}
+
+.typeBase {
+    background-color: #EBBB78;
+    margin: 3px;
+
+    /* padding-left: 3px;
+    padding-right: 3px; */
+    padding: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    text-transform: capitalize;
+    font-family: 'Rancho', cursive;
+    font-size: 18px;
+    width: 50px;
 }

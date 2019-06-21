@@ -83,16 +83,7 @@ export class PokemonService {
     return this.http.get<TypeDetails>(url);
   }
 
-  // searchPokemons(term: string): Observable<PokemonDetails> {
-  //   if (!term.trim()) {
-  //     // if not search term, return empty hero array.
-  //     return of();
-  //   }
-  //   return this.http.get<PokemonDetails>(`${this.baseUrl}/${term}`).pipe(
-  //     tap(_ => console.log(`${this.baseUrl}/${term}`)),
-  //     catchError(this.handleError<PokemonDetails>('searchPokemon', ))
-  //   );
-  // }
+
 
 
 

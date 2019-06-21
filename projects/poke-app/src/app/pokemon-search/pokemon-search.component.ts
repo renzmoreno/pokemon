@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service'
-import {
-  debounceTime, distinctUntilChanged, switchMap
-} from 'rxjs/operators';
-import { Observable, Subject  } from 'rxjs';
-import { PokemonDetails } from '../response-details.model'
+
 import { AllPokemonTypes } from '../response-type.model'
 
 import { ActivatedRoute, Router } from '@angular/router'
@@ -17,8 +13,6 @@ import { PageDataService } from '../page-data-service'
   styleUrls: ['./pokemon-search.component.css']
 })
 export class PokemonSearchComponent implements OnInit {
-  // pokemon$ : Observable<PokemonDetails>;
-  // private searchTerms = new Subject<string>();
   pokemonName: String;
   functionType: string;
   pokemonTypes: string[] = new Array();
@@ -29,9 +23,8 @@ export class PokemonSearchComponent implements OnInit {
               public pageDataService: PageDataService) { }
 
   search(term: string): void {
-    // this.searchTerms.next(term);
     this.pokemonName = term.toLocaleLowerCase(); 
-    // this.router.navigate[term]
+
   }
 
   onSelectFunction() {
@@ -40,23 +33,21 @@ export class PokemonSearchComponent implements OnInit {
     var opt = e.options[sel].value;
     this.functionType = opt;
     if(opt === "searchByName"){
+      if(!this.pageDataService.pageData.length) {
+        this.router.navigate(['pokemon/page/1']);
+      }
+      this.pageDataService.clear();
+      this.pageDataService.addNumberedPage(31);
+
+    } else {
       this.pageDataService.clear();
     }
-    // console.log(opt);
   }
 
-  onSelectType() {
-    var e = document.getElementById("typeOptions") as HTMLSelectElement;
-    var sel = e.selectedIndex;
-    var opt = e.options[sel].value;
-    this.functionType = opt;
-    // console.log(opt);
-    this.router.navigate(['pokemon/byType/' + opt]);
-  }
+
 
   getPokemonTypes() {
     this.pokemonService.getPokemonTypes().subscribe((response: AllPokemonTypes) => {
-      this.pokemonTypes.push("ALL");
       response.results.forEach(item => {
         // console.log(item.name);
         
@@ -67,16 +58,16 @@ export class PokemonSearchComponent implements OnInit {
     })
   }
 
-  test(isChecked: boolean, type: string) {
-    console.log(isChecked + ' ' +type);
+  selectedType(isChecked: boolean, type: string) {
+    // console.log(isChecked + ' ' +type);
     if(isChecked){
       this.pageDataService.add(type);
     } else {
       this.pageDataService.remove(type);
-      var currPage = this.route.snapshot.paramMap.get('pageNum')
-      console.log(this.route.snapshot.paramMap.get('pageNum'));
+      // var currPage = this.route.snapshot.paramMap.get('pageNum')
+      var currPage = this.pageDataService.currentPage;
+      // console.log(currPage);
       if (currPage === type){
-        console.log("need to reroute");
         this.router.navigate(['pokemon/byType/' + this.pageDataService.pageData[0]]);
       }
     }
@@ -85,21 +76,12 @@ export class PokemonSearchComponent implements OnInit {
 
 
   ngOnInit() {
+    console.log("onInit search");
     this.functionType = "searchByName";
     this.getPokemonTypes();
-    // this.pokemonTypes = ["electric", "dark"];
-    // this.pokemon$ = this.searchTerms.pipe(
-    //   // wait 300ms after each keystroke before considering the term
-    //   // debounceTime(300),
- 
-    //   // ignore new term if same as previous term
-    //   // distinctUntilChanged(),
- 
-    //   // switch to new search observable each time the term changes
-    //   switchMap((term: string) => this.pokemonService.searchPokemonsByType(term)),
-
-    // );
-  
+    this.pageDataService.clear();
+    this.pageDataService.addNumberedPage(31);
+   
   }
 
 }

@@ -8,13 +8,31 @@
   </div>
 </div> -->
 
-<div *ngIf="pageDataService.pageData.length">
-
-    <div *ngFor="let page of pageDataService.pageData"
-    routerLink="/pokemon/byType/{{page}}" >
-        {{page}}
-
-    </div>
-
+<div *ngIf="pageDataService.pageData.length; else noList">
+  <div *ngIf="pageDataService.pageType === 'numeric'">
+      <div class="horizontal_flex_cont">
+          <div *ngFor="let page of pageDataService.pageData"
+          routerLink="/pokemon/page/{{page}}" 
+           class="page">
+              {{page}}
+          </div>
+        </div>
+  </div>
+  <div *ngIf="pageDataService.pageType === 'pokemonType'">
+      <div class="horizontal_flex_cont">
+        
+          <div  id="{{page}}"  *ngFor="let page of pageDataService.pageData"
+          routerLink="/pokemon/byType/{{page}}" 
+           class="typeBase page">
+              {{page}}
+          </div>
+        </div>
+  </div>
+  
 </div>
+<ng-template #noList>
+  <div class="noList">
+    Please Select a Pokemon Type.
+  </div>
+ </ng-template>
 
